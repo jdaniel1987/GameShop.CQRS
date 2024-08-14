@@ -1,0 +1,3 @@
+﻿namespace GamesShop.Application.Queries.GetAllGamesConsoles;
+
+public record GetAllGamesConsolesResponse(IReadOnlyCollection<GetAllGamesConsolesResponseItem> GamesConsoles);

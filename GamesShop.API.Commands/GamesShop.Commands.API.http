@@ -1,0 +1,6 @@
+@GamesShop.Commands.API_HostAddress = http://localhost:5190
+
+GET {{GamesShop.Commands.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
