@@ -11,7 +11,7 @@ public class UpdateGameModule : ICarterModule
     {
         app.MapPut("api/UpdateGame", async (IMediator mediator, UpdateGameCommand command, CancellationToken cancellationToken) =>
         {
-            return await mediator.Send(command, cancellationToken);
+            return ResultChecker.CheckResult(await mediator.Send(command, cancellationToken));
         })
         .WithOpenApi()
         .WithName(nameof(UpdateGameModule))

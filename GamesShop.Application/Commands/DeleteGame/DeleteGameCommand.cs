@@ -1,6 +1,6 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using CSharpFunctionalExtensions;
+using MediatR;
 
 namespace GamesShop.Application.Commands.DeleteGame;
 
-public record DeleteGameCommand(int GameId) : IRequest<IResult>;
+public record DeleteGameCommand(int GameId) : IRequest<IResult<DeleteGameResponse>>;

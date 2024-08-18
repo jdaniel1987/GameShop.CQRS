@@ -51,7 +51,7 @@ public class GameRepository(
         
         return await databaseContext
             .Games
-            .Where(g => g.Name.Contains(gameName, StringComparison.OrdinalIgnoreCase))
+            .Where(g => EF.Functions.Like(g.Name, $"%{gameName}%"))
             .ToArrayAsync(cancellationToken);
     }
 

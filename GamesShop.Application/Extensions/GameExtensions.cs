@@ -1,4 +1,6 @@
 ﻿using GamesShop.Application.Commands.AddGame;
+using GamesShop.Application.Commands.DeleteGame;
+using GamesShop.Application.Commands.DeleteGamesConsole;
 using GamesShop.Application.Commands.UpdateGame;
 using GamesShop.Application.Events.GameCreated;
 using GamesShop.Application.Queries.GetAllGames;
@@ -68,4 +70,17 @@ public static class GameExtensions
                 g.GamesConsoleId,
                 g.GamesConsole!.Name))
             .ToImmutableArray());
+
+    public static AddGameResponse ToAddGameResponse(this Game game)
+        => new(
+            game.Id, 
+            game.Name);
+
+    public static UpdateGameResponse ToUpdateGameResponse(this Game game)
+        => new(
+            game.Id,
+            game.Name);
+
+    public static DeleteGameResponse ToDeleteGameResponse(this Game game)
+        => new();
 }

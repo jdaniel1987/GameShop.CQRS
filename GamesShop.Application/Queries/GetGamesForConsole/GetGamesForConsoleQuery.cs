@@ -1,5 +1,6 @@
-﻿using MediatR;
+﻿using CSharpFunctionalExtensions;
+using MediatR;
 
 namespace GamesShop.Application.Queries.GetGamesForConsole;
 
-public record GetGamesForConsoleQuery(int GamesConsoleId) : IRequest<GetGamesForConsoleResponse>;
+public record GetGamesForConsoleQuery(int GamesConsoleId) : IRequest<IResult<GetGamesForConsoleResponse>>;

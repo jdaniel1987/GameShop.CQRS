@@ -1,5 +1,6 @@
-﻿using MediatR;
+﻿using CSharpFunctionalExtensions;
+using MediatR;
 
 namespace GamesShop.Application.Queries.GetAllGamesConsoles;
 
-public record GetAllGamesConsolesQuery() : IRequest<GetAllGamesConsolesResponse>;
+public record GetAllGamesConsolesQuery() : IRequest<IResult<GetAllGamesConsolesResponse>>;

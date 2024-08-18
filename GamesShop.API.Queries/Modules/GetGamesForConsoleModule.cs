@@ -9,9 +9,9 @@ public class GetGamesForConsoleModule : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("api/GamesForConsole/{GamesConsoleId:int}", (int GamesConsoleId, IMediator mediator) =>
+        app.MapGet("api/GamesForConsole/{GamesConsoleId:int}", async (int GamesConsoleId, IMediator mediator) =>
         {
-            return mediator.Send(new GetGamesForConsoleQuery(GamesConsoleId));
+            return ResultChecker.CheckResult(await mediator.Send(new GetGamesForConsoleQuery(GamesConsoleId)));
         })
         .WithOpenApi()
         .WithName(nameof(GetGamesForConsoleModule))

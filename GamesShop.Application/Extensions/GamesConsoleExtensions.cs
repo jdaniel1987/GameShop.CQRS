@@ -1,4 +1,6 @@
 ﻿using GamesShop.Application.Commands.AddGamesConsole;
+using GamesShop.Application.Commands.DeleteGamesConsole;
+using GamesShop.Application.Commands.UpdateGame;
 using GamesShop.Application.Commands.UpdateGamesConsole;
 using GamesShop.Application.Queries.GetAllGamesConsoles;
 using GamesShop.Domain.Entities;
@@ -38,4 +40,17 @@ public static class GamesConsoleExtensions
                 gc.Price.Value,
                 gc.Games.Count))
             .ToImmutableArray());
+
+    public static AddGamesConsoleResponse ToAddGamesConsoleResponse(this GamesConsole gamesConsole)
+        => new(
+            gamesConsole.Id,
+            gamesConsole.Name);
+
+    public static UpdateGamesConsoleResponse ToUpdateGamesConsoleResponse(this GamesConsole gamesConsole)
+        => new(
+            gamesConsole.Id,
+            gamesConsole.Name);
+
+    public static DeleteGamesConsoleResponse ToDeleteGamesConsoleResponse(this GamesConsole gamesConsole)
+        => new();
 }

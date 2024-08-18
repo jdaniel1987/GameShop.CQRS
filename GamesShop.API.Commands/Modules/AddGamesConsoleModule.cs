@@ -11,7 +11,7 @@ public class AddGamesConsoleModule : ICarterModule
     {
         app.MapPost("api/AddGamesConsole", async (IMediator mediator, AddGamesConsoleCommand command, CancellationToken cancellationToken) =>
         {
-            return await mediator.Send(command, cancellationToken);
+            return ResultChecker.CheckResult(await mediator.Send(command, cancellationToken));
         })
         .WithOpenApi()
         .WithName(nameof(AddGamesConsoleModule))

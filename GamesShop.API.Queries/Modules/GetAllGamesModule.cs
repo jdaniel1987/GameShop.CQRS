@@ -9,9 +9,9 @@ public class GetAllGamesModule : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("api/Games", (IMediator mediator) =>
+        app.MapGet("api/Games", async (IMediator mediator) =>
         {
-            return mediator.Send(new GetAllGamesQuery());
+            return ResultChecker.CheckResult(await mediator.Send(new GetAllGamesQuery()));
         })
         .WithOpenApi()
         .WithName(nameof(GetAllGamesModule))
