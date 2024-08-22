@@ -1,6 +1,5 @@
 ﻿using GamesShop.Application.Commands.AddGame;
 using GamesShop.Application.Commands.DeleteGame;
-using GamesShop.Application.Commands.DeleteGamesConsole;
 using GamesShop.Application.Commands.UpdateGame;
 using GamesShop.Application.Events.GameCreated;
 using GamesShop.Application.Queries.GetAllGames;
@@ -40,7 +39,7 @@ public static class GameExtensions
 
     public static GetAllGamesResponse ToGetAllGamesResponse(this IReadOnlyCollection<Game> games)
         => new(games.Select(g => 
-            new GetGamesByNameResponseItem(
+            new GetAllGamesResponseItem(
                 g.Id,
                 g.Name,
                 g.Publisher,

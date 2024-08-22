@@ -22,7 +22,7 @@ public class GameRepository(
             .ToArrayAsync(cancellationToken);
     }
 
-    public async Task<IReadOnlyCollection<Game>> GetAllGamesForConsole(int gamesConsoleId, CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<Game>> GetGamesForConsole(int gamesConsoleId, CancellationToken cancellationToken)
     {
         var readOnlyDbContext = await _readOnlyDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
         var gameConsole = await readOnlyDbContext
@@ -32,49 +32,53 @@ public class GameRepository(
 
         return await readOnlyDbContext
             .Games
+            .Include(g => g.GamesConsole)
             .Where(x => x.GamesConsoleId == gamesConsoleId)
             .ToArrayAsync(cancellationToken);
     }
 
     public async Task<Game?> GetGame(int gameId, CancellationToken cancellationToken)
     {
-        var databaseContext = await _readOnlyDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
+        var readOnlyDbContext = await _readOnlyDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
 
-        return await databaseContext
+        return await readOnlyDbContext
             .Games
+            .Include(g => g.GamesConsole)
             .FirstOrDefaultAsync(x => x.Id == gameId, cancellationToken);
     }
 
     public async Task<IReadOnlyCollection<Game>> GetGamesByName(string gameName, CancellationToken cancellationToken)
     {
-        var databaseContext = await _readOnlyDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
+        var readOnlyDbContext = await _readOnlyDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
         
-        return await databaseContext
+        return await readOnlyDbContext
             .Games
+            .Include(g => g.GamesConsole)
             .Where(g => EF.Functions.Like(g.Name, $"%{gameName}%"))
             .ToArrayAsync(cancellationToken);
     }
 
     public async Task AddGame(Game game, CancellationToken cancellationToken)
     {
-        var databaseContext = await _writeReadDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
+        var writeReadDbContext = await _writeReadDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
 
-        await databaseContext.Games.AddAsync(game, cancellationToken);
-        await databaseContext.SaveChangesAsync(cancellationToken);
+        await writeReadDbContext.Games.AddAsync(game, cancellationToken);
+        await writeReadDbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task DeleteGame(Game game, CancellationToken cancellationToken)
     {
-        var databaseContext = await _writeReadDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
+        var writeReadDbContext = await _writeReadDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
 
-        databaseContext.Games.Remove(game);
-        await databaseContext.SaveChangesAsync(cancellationToken);
+        writeReadDbContext.Games.Remove(game);
+        await writeReadDbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task UpdateGame(Game game, CancellationToken cancellationToken)
     {
-        var databaseContext = await _writeReadDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
-        
-        await databaseContext.SaveChangesAsync(cancellationToken);
+        var writeReadDbContext = await _writeReadDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
+
+        writeReadDbContext.Update(game);
+        await writeReadDbContext.SaveChangesAsync(cancellationToken);
     }
 }

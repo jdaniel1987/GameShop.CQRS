@@ -11,7 +11,9 @@ public class DeleteGamesConsoleModule : ICarterModule
     {
         app.MapDelete("api/DeleteGamesConsole/{GamesConsoleId:int}", async (int GamesConsoleId, IMediator mediator, CancellationToken cancellationToken) =>
         {
-            return ResultChecker.CheckResult(await mediator.Send(new DeleteGamesConsoleCommand(GamesConsoleId), cancellationToken));
+            var result = await mediator.Send(new DeleteGamesConsoleCommand(GamesConsoleId), cancellationToken);
+
+            return result.IsSuccess ? Results.NoContent() : Results.BadRequest(result.Error);
         })
         .WithOpenApi()
         .WithName(nameof(DeleteGamesConsoleModule))

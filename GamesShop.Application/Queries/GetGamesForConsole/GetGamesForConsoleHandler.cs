@@ -21,7 +21,7 @@ public class GetGamesForConsoleHandler(
             return Result.Failure<GetGamesForConsoleResponse>($"Console with ID {request.GamesConsoleId} does not exist");
         }
 
-        var games = await _gameRepository.GetAllGamesForConsole(request.GamesConsoleId, cancellationToken);
+        var games = await _gameRepository.GetGamesForConsole(request.GamesConsoleId, cancellationToken);
 
         return Result.Success(games.ToGetGamesForConsoleResponse());
     }

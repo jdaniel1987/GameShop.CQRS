@@ -11,12 +11,14 @@ public class UpdateGameModule : ICarterModule
     {
         app.MapPut("api/UpdateGame", async (IMediator mediator, UpdateGameCommand command, CancellationToken cancellationToken) =>
         {
-            return ResultChecker.CheckResult(await mediator.Send(command, cancellationToken));
+            var result = await mediator.Send(command, cancellationToken);
+
+            return result.IsSuccess ? Results.NoContent() : Results.BadRequest(result.Error);
         })
         .WithOpenApi()
         .WithName(nameof(UpdateGameModule))
         .WithTags(nameof(Game))
         .ProducesValidationProblem()
-        .Produces(StatusCodes.Status200OK);
+        .Produces(StatusCodes.Status204NoContent);
     }
 }

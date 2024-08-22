@@ -1,4 +1,4 @@
-﻿namespace GamesShop.Application.Queries.GetAllGames;
+﻿namespace GamesShop.Application.Queries.GetGamesByName;
 
 public record GetGamesByNameResponseItem(
     int Id,

@@ -2,7 +2,6 @@
 using GamesShop.Application.Commands.AddGame;
 using GamesShop.Domain.Entities;
 using MediatR;
-using System.Runtime.CompilerServices;
 
 namespace GamesShop.API.Commands.Modules;
 
@@ -12,7 +11,9 @@ public class AddGameModule : ICarterModule
     {
         app.MapPost("api/AddGame", async (IMediator mediator, AddGameCommand command, CancellationToken cancellationToken) =>
         {
-            return ResultChecker.CheckResult(await mediator.Send(command, cancellationToken));
+            var result = await mediator.Send(command, cancellationToken);
+
+            return result.IsSuccess ? Results.Created() : Results.BadRequest(result.Error);
         })
         .WithOpenApi()
         .WithName(nameof(AddGameModule))
