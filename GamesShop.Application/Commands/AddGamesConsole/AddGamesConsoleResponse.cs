@@ -1,5 +1,5 @@
 ﻿namespace GamesShop.Application.Commands.AddGamesConsole;
 
 public record AddGamesConsoleResponse(
-    int id,
+    int Id,
     string Name);

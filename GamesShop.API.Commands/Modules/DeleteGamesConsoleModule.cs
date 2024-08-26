@@ -13,12 +13,21 @@ public class DeleteGamesConsoleModule : ICarterModule
         {
             var result = await mediator.Send(new DeleteGamesConsoleCommand(GamesConsoleId), cancellationToken);
 
-            return result.IsSuccess ? Results.NoContent() : Results.BadRequest(result.Error);
+            return result.IsSuccess ? 
+                Results.NoContent() : 
+                Results.BadRequest(result.Error);
         })
-        .WithOpenApi()
+        .WithOpenApi(operation =>
+        {
+            operation.Summary = "Deletes a game";
+            operation.Description = "Deletes a games console entry from the system.";
+            return operation;
+        })
         .WithName(nameof(DeleteGamesConsoleModule))
         .WithTags(nameof(GamesConsole))
         .ProducesValidationProblem()
-        .Produces(StatusCodes.Status204NoContent);
+        .Produces(StatusCodes.Status204NoContent)
+        .Produces(StatusCodes.Status400BadRequest)
+        .Produces(StatusCodes.Status500InternalServerError);
     }
 }

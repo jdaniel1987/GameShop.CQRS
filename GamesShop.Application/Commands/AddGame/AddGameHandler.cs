@@ -21,6 +21,7 @@ public class AddGameHandler(
         {
             return Result.Failure<AddGameResponse>($"Games Console with ID: {request.GamesConsoleId} not found.");
         }
+
         var game = request.ToDomain();
         await _gameRepository.AddGame(game, cancellationToken);
 

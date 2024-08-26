@@ -13,12 +13,21 @@ public class AddGamesConsoleModule : ICarterModule
         {
             var result = await mediator.Send(command, cancellationToken);
 
-            return result.IsSuccess ? Results.Created() : Results.BadRequest(result.Error);
+            return result.IsSuccess ? 
+                Results.Created() : 
+                Results.BadRequest(result.Error);
         })
-        .WithOpenApi()
+        .WithOpenApi(operation =>
+        {
+            operation.Summary = "Adds a new games console";
+            operation.Description = "Creates a new games console entry in the system.";
+            return operation;
+        })
         .WithName(nameof(AddGamesConsoleModule))
         .WithTags(nameof(GamesConsole))
         .ProducesValidationProblem()
-        .Produces(StatusCodes.Status201Created);
+        .Produces(StatusCodes.Status201Created)
+        .Produces(StatusCodes.Status400BadRequest)
+        .Produces(StatusCodes.Status500InternalServerError);
     }
 }

@@ -13,12 +13,21 @@ public class UpdateGameModule : ICarterModule
         {
             var result = await mediator.Send(command, cancellationToken);
 
-            return result.IsSuccess ? Results.NoContent() : Results.BadRequest(result.Error);
+            return result.IsSuccess ? 
+                Results.NoContent() : 
+                Results.BadRequest(result.Error);
         })
-        .WithOpenApi()
+        .WithOpenApi(operation =>
+        {
+            operation.Summary = "Updates a game";
+            operation.Description = "Updates a game entry in the system.";
+            return operation;
+        })
         .WithName(nameof(UpdateGameModule))
         .WithTags(nameof(Game))
         .ProducesValidationProblem()
-        .Produces(StatusCodes.Status204NoContent);
+        .Produces(StatusCodes.Status204NoContent)
+        .Produces(StatusCodes.Status400BadRequest)
+        .Produces(StatusCodes.Status500InternalServerError);
     }
 }
