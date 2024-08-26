@@ -19,7 +19,7 @@ public class UpdateGameHandler(
         {
             return Result.Failure<UpdateGameResponse>($"Games Console with ID: {request.GamesConsoleId} not found.");
         }
-        var game = request.ToDomainWithGamesConsole();
+        var game = request.ToDomain();
         await _gameRepository.UpdateGame(game, cancellationToken);
 
         return Result.Success(game.ToUpdateGameResponse());

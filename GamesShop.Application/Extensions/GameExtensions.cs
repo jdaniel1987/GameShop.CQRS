@@ -22,7 +22,7 @@ public static class GameExtensions
             GamesConsoleId = command.GamesConsoleId
         };
 
-    public static Game ToDomainWithGamesConsole(this UpdateGameCommand command)
+    public static Game ToDomain(this UpdateGameCommand command)
         => new()
         {
             Id = command.Id,
