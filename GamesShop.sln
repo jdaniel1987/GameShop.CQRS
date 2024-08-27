@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesShop.API.Commands", "G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesShop.Application", "GamesShop.Application\GamesShop.Application.csproj", "{61B2D1EA-4B50-4746-AEF2-68384E194C1D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesShop.Queries.IntegrationTests", "GamesShop.IntegrationTests\GamesShop.Queries.IntegrationTests.csproj", "{FE2C51FD-0E59-4EBC-B07D-7199B45DD2B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesShop.Queries.IntegrationTests", "GamesShop.Queries.IntegrationTests\GamesShop.Queries.IntegrationTests.csproj", "{FE2C51FD-0E59-4EBC-B07D-7199B45DD2B7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesShop.Commands.IntegrationTests", "GamesShop.Commands.IntegrationTests\GamesShop.Commands.IntegrationTests.csproj", "{504AA152-B29E-4037-BC39-8A36FD41FF04}"
 EndProject
