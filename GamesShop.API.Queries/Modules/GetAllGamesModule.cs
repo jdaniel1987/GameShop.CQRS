@@ -13,8 +13,15 @@ public class GetAllGamesModule : ICarterModule
         {
             return ResultChecker.CheckResult(await mediator.Send(new GetAllGamesQuery()));
         })
-        .WithOpenApi()
+        .WithOpenApi(operation =>
+        {
+            operation.Summary = "Gets all games";
+            operation.Description = "Gets all games from system.";
+            return operation;
+        })
         .WithName(nameof(GetAllGamesModule))
-        .WithTags(nameof(Game));
+        .WithTags(nameof(Game))
+        .Produces(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status500InternalServerError);
     }
 }

@@ -13,8 +13,15 @@ public class GetAllGamesConsolesModule : ICarterModule
         {
             return ResultChecker.CheckResult(await mediator.Send(new GetAllGamesConsolesQuery()));
         })
-        .WithOpenApi()
+        .WithOpenApi(operation =>
+        {
+            operation.Summary = "Gets all games consoles";
+            operation.Description = "Gets all games consoles from system.";
+            return operation;
+        })
         .WithName(nameof(GetAllGamesConsolesModule))
-        .WithTags(nameof(GamesConsole));
+        .WithTags(nameof(GamesConsole))
+        .Produces(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status500InternalServerError);
     }
 }
