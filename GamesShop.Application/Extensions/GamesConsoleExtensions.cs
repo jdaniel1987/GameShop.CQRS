@@ -1,6 +1,5 @@
 ﻿using GamesShop.Application.Commands.AddGamesConsole;
 using GamesShop.Application.Commands.DeleteGamesConsole;
-using GamesShop.Application.Commands.UpdateGame;
 using GamesShop.Application.Commands.UpdateGamesConsole;
 using GamesShop.Application.Queries.GetAllGamesConsoles;
 using GamesShop.Domain.Entities;
@@ -11,8 +10,8 @@ namespace GamesShop.Application.Extensions;
 
 public static class GamesConsoleExtensions
 {
-    public static GamesConsole ToDomain(this AddGamesConsoleCommand command)
-        => new()
+    public static GamesConsole ToDomain(this AddGamesConsoleCommand command) =>
+        new()
         {
             Id = 0,
             Name = command.Name,
@@ -21,8 +20,8 @@ public static class GamesConsoleExtensions
             Games = []
         };
 
-    public static GamesConsole ToDomain(this UpdateGamesConsoleCommand command)
-        => new()
+    public static GamesConsole ToDomain(this UpdateGamesConsoleCommand command) =>
+        new()
         {
             Id = command.Id,
             Name = command.Name,
@@ -31,8 +30,8 @@ public static class GamesConsoleExtensions
             Games = []
         };
 
-    public static GetAllGamesConsolesResponse ToGetAllGamesConsolesResponse(this IReadOnlyCollection<GamesConsole> gamesConsoles)
-        => new(gamesConsoles.Select(gc =>
+    public static GetAllGamesConsolesResponse ToGetAllGamesConsolesResponse(this IReadOnlyCollection<GamesConsole> gamesConsoles) =>
+        new(gamesConsoles.Select(gc =>
             new GetAllGamesConsolesResponseItem(
                 gc.Id,
                 gc.Name,
@@ -41,16 +40,16 @@ public static class GamesConsoleExtensions
                 gc.Games.Count))
             .ToImmutableArray());
 
-    public static AddGamesConsoleResponse ToAddGamesConsoleResponse(this GamesConsole gamesConsole)
-        => new(
+    public static AddGamesConsoleResponse ToAddGamesConsoleResponse(this GamesConsole gamesConsole) =>
+        new(
             gamesConsole.Id,
             gamesConsole.Name);
 
-    public static UpdateGamesConsoleResponse ToUpdateGamesConsoleResponse(this GamesConsole gamesConsole)
-        => new(
+    public static UpdateGamesConsoleResponse ToUpdateGamesConsoleResponse(this GamesConsole gamesConsole) =>
+        new(
             gamesConsole.Id,
             gamesConsole.Name);
 
-    public static DeleteGamesConsoleResponse ToDeleteGamesConsoleResponse(this GamesConsole gamesConsole)
-        => new();
+    public static DeleteGamesConsoleResponse ToDeleteGamesConsoleResponse(this GamesConsole gamesConsole) =>
+        new();
 }

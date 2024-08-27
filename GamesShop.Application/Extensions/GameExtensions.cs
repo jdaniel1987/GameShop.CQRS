@@ -13,8 +13,8 @@ namespace GamesShop.Application.Extensions;
 
 public static class GameExtensions
 {
-    public static Game ToDomain(this AddGameCommand command)
-        => new()
+    public static Game ToDomain(this AddGameCommand command) =>
+        new()
         {
             Name = command.Name,
             Publisher = command.Publisher,
@@ -22,8 +22,8 @@ public static class GameExtensions
             GamesConsoleId = command.GamesConsoleId
         };
 
-    public static Game ToDomain(this UpdateGameCommand command)
-        => new()
+    public static Game ToDomain(this UpdateGameCommand command) =>
+        new()
         {
             Id = command.Id,
             Name = command.Name,
@@ -32,16 +32,16 @@ public static class GameExtensions
             GamesConsoleId = command.GamesConsoleId
         };
 
-    public static GameCreatedEvent ToEvent(this Game game)
-        => new(
+    public static GameCreatedEvent ToEvent(this Game game) =>
+        new(
             GameName: game.Name,
             Publisher: game.Publisher,
             PriceUSD: game.Price.Value,
             PriceEUR: ((PriceEuros)game.Price).Value, // Conversion is automatic due to ValueObject operator
             CreationDate: DateTime.UtcNow);
 
-    public static GetAllGamesResponse ToGetAllGamesResponse(this IReadOnlyCollection<Game> games)
-        => new(games.Select(g => 
+    public static GetAllGamesResponse ToGetAllGamesResponse(this IReadOnlyCollection<Game> games) =>
+        new(games.Select(g => 
             new GetAllGamesResponseItem(
                 g.Id,
                 g.Name,
@@ -51,8 +51,8 @@ public static class GameExtensions
                 g.GamesConsole!.Name))
             .ToImmutableArray());
 
-    public static GetGamesByNameResponse ToGetGamesByNameResponse(this IReadOnlyCollection<Game> games)
-        => new(games.Select(g =>
+    public static GetGamesByNameResponse ToGetGamesByNameResponse(this IReadOnlyCollection<Game> games) =>
+        new(games.Select(g =>
             new GetGamesByNameResponseItem(
                 g.Id,
                 g.Name,
@@ -62,8 +62,8 @@ public static class GameExtensions
                 g.GamesConsole!.Name))
             .ToImmutableArray());
 
-    public static GetGamesForConsoleResponse ToGetGamesForConsoleResponse(this IReadOnlyCollection<Game> games)
-        => new(games.Select(g =>
+    public static GetGamesForConsoleResponse ToGetGamesForConsoleResponse(this IReadOnlyCollection<Game> games) =>
+        new(games.Select(g =>
             new GetGamesForConsoleResponseItem(
                 g.Id,
                 g.Name,
@@ -73,16 +73,16 @@ public static class GameExtensions
                 g.GamesConsole!.Name))
             .ToImmutableArray());
 
-    public static AddGameResponse ToAddGameResponse(this Game game)
-        => new(
+    public static AddGameResponse ToAddGameResponse(this Game game) =>
+        new(
             game.Id, 
             game.Name);
 
-    public static UpdateGameResponse ToUpdateGameResponse(this Game game)
-        => new(
+    public static UpdateGameResponse ToUpdateGameResponse(this Game game) =>
+        new(
             game.Id,
             game.Name);
 
-    public static DeleteGameResponse ToDeleteGameResponse(this Game game)
-        => new();
+    public static DeleteGameResponse ToDeleteGameResponse(this Game game) =>
+        new();
 }

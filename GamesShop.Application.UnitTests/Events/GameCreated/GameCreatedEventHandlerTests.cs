@@ -1,10 +1,7 @@
-﻿using AutoFixture.AutoMoq;
-using AutoFixture.Xunit2;
-using AutoFixture;
+﻿using AutoFixture.Xunit2;
 using GamesShop.Application.Events.GameCreated;
 using Moq;
 using GamesShop.Domain.Services;
-using GamesShop.Domain.ValueObjects;
 
 namespace GamesShop.Application.UnitTests.Events.GameCreated;
 
@@ -12,7 +9,7 @@ public class GameCreatedEventHandlerTests
 {
     [Theory, AutoData]
     public async Task Handle_ShouldSendEmailNotification_WhenGameCreated(
-        Mock<IEmailSender> emailSenderMock,
+        [Frozen] Mock<IEmailSender> emailSenderMock,
         GameCreatedEvent notification)
     {
         // Arrange
