@@ -2,20 +2,18 @@
 using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
 using FluentAssertions;
-using GamesShop.Application.Commands.AddGame;
-using GamesShop.Application.Events.GameCreated;
+using GamesShop.Application.Commands.UpdateGame;
 using GamesShop.Domain.Entities;
 using GamesShop.Domain.Repositories;
-using MediatR;
 using Moq;
 
-namespace GamesShop.Application.UnitTests.Commands.AddGame;
+namespace GamesShop.Application.UnitTests.Commands.UpdateGame;
 
-public class AddGameHandlerTests
+public class UpdateGameHandlerTests
 {
     private readonly IFixture _fixture;
 
-    public AddGameHandlerTests()
+    public UpdateGameHandlerTests()
     {
         _fixture = new Fixture().Customize(new AutoMoqCustomization());
     }
@@ -24,11 +22,10 @@ public class AddGameHandlerTests
     public async Task Handle_ShouldReturnFailureResult_WhenGamesConsoleIsNotFound(
         [Frozen] Mock<IGamesConsoleRepository> gamesConsoleRepositoryMock,
         [Frozen] Mock<IGameRepository> gameRepositoryMock,
-        [Frozen] Mock<IPublisher> publisherMock,
-        AddGameCommand command)
+        UpdateGameCommand command)
     {
         // Arrange
-        var handler = new AddGameHandler(gameRepositoryMock.Object, gamesConsoleRepositoryMock.Object, publisherMock.Object);
+        var handler = new UpdateGameHandler(gameRepositoryMock.Object, gamesConsoleRepositoryMock.Object);
 
         gamesConsoleRepositoryMock.Setup(repo => repo.GetGamesConsole(It.IsAny<int>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync((GamesConsole?)null);
@@ -42,11 +39,10 @@ public class AddGameHandlerTests
     }
 
     [Theory, AutoData]
-    public async Task Handle_ShouldAddGameAndPublishEvent_WhenGamesConsoleIsFound(
+    public async Task Handle_ShouldUpdateGame_WhenGamesConsoleIsFound(
         [Frozen] Mock<IGamesConsoleRepository> gamesConsoleRepositoryMock,
         [Frozen] Mock<IGameRepository> gameRepositoryMock,
-        [Frozen] Mock<IPublisher> publisherMock,
-        AddGameCommand command,
+        UpdateGameCommand command,
         IFixture fixture)
     {
         // Arrange
@@ -64,19 +60,15 @@ public class AddGameHandlerTests
         gameRepositoryMock.Setup(repo => repo.AddGame(It.IsAny<Game>(), It.IsAny<CancellationToken>()))
             .Returns(Task.CompletedTask);
 
-        publisherMock.Setup(pub => pub.Publish(It.IsAny<GameCreatedEvent>(), It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask);
-
-        var handler = new AddGameHandler(gameRepositoryMock.Object, gamesConsoleRepositoryMock.Object, publisherMock.Object);
+        var handler = new UpdateGameHandler(gameRepositoryMock.Object, gamesConsoleRepositoryMock.Object);
 
         // Act
         var result = await handler.Handle(command, CancellationToken.None);
 
         // Assert
-        gameRepositoryMock.Verify(repo => repo.AddGame(It.IsAny<Game>(), It.IsAny<CancellationToken>()), Times.Once);
-        publisherMock.Verify(pub => pub.Publish(It.IsAny<GameCreatedEvent>(), It.IsAny<CancellationToken>()), Times.Once);
+        gameRepositoryMock.Verify(repo => repo.UpdateGame(It.IsAny<Game>(), It.IsAny<CancellationToken>()), Times.Once);
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().NotBeNull();
-        result.Value.Should().BeOfType<AddGameResponse>();
+        result.Value.Should().BeOfType<UpdateGameResponse>();
     }
 }
