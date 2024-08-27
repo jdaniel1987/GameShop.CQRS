@@ -17,5 +17,6 @@ public record Price
 
     public static implicit operator PriceEuros(Price usd) =>
         PriceEuros.Create(usd.Value * 1.1);
+
     public override string ToString() => Value.ToString();
 }

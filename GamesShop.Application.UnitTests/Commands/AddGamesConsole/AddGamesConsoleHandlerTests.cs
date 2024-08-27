@@ -24,13 +24,13 @@ public class AddGamesConsoleHandlerTests
         AddGamesConsoleCommand command)
     {
         // Arrange
+        var handler = new AddGamesConsoleHandler(gamesConsoleRepositoryMock.Object);
+
         gamesConsoleRepositoryMock
             .Setup(repo => repo.AddGamesConsole(It.IsAny<GamesConsole>(), It.IsAny<CancellationToken>()))
             .Returns(Task.CompletedTask);
 
         // Act
-        var handler = new AddGamesConsoleHandler(gamesConsoleRepositoryMock.Object);
-
         var result = await handler.Handle(command, CancellationToken.None);
 
         // Assert

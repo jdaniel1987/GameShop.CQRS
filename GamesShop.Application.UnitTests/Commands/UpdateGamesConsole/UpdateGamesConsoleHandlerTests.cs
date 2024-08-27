@@ -25,6 +25,8 @@ public class UpdateGamesConsoleHandlerTests
         IFixture fixture)
     {
         // Arrange
+        var handler = new UpdateGamesConsoleHandler(gamesConsoleRepositoryMock.Object);
+
         var game = fixture.Build<Game>()
             .Without(g => g.GamesConsole)
             .Create();
@@ -35,8 +37,6 @@ public class UpdateGamesConsoleHandlerTests
 
         gamesConsoleRepositoryMock.Setup(repo => repo.GetGamesConsole(It.IsAny<int>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(gamesConsole);
-
-        var handler = new UpdateGamesConsoleHandler(gamesConsoleRepositoryMock.Object);
 
         // Act
         var result = await handler.Handle(command, CancellationToken.None);

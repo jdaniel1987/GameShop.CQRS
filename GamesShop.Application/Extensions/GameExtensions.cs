@@ -34,7 +34,10 @@ public static class GameExtensions
 
     public static GameCreatedEvent ToEvent(this Game game)
         => new(
-            Game: game,
+            GameName: game.Name,
+            Publisher: game.Publisher,
+            PriceUSD: game.Price.Value,
+            PriceEUR: ((PriceEuros)game.Price).Value, // Conversion is automatic due to ValueObject operator
             CreationDate: DateTime.UtcNow);
 
     public static GetAllGamesResponse ToGetAllGamesResponse(this IReadOnlyCollection<Game> games)

@@ -1,8 +1,10 @@
-﻿using GamesShop.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 
 namespace GamesShop.Application.Events.GameCreated;
 
 public record GameCreatedEvent(
-    Game Game,
+    string GameName,
+    string Publisher,
+    double PriceUSD,
+    double PriceEUR,
     DateTime CreationDate) : INotification;
