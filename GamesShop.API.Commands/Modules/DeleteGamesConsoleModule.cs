@@ -9,7 +9,7 @@ public class DeleteGamesConsoleModule : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapDelete("api/DeleteGamesConsole/{GamesConsoleId:int}", async (int GamesConsoleId, IMediator mediator, CancellationToken cancellationToken) =>
+        app.MapDelete("api/DeleteGamesConsole/{GamesConsoleId:int}", async (IMediator mediator, int GamesConsoleId, CancellationToken cancellationToken) =>
         {
             var result = await mediator.Send(new DeleteGamesConsoleCommand(GamesConsoleId), cancellationToken);
 

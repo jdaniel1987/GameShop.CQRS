@@ -9,7 +9,7 @@ public class GetGamesByNameConsolesModule : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("api/GamesByName/{GameName}", async (string gameName, IMediator mediator) =>
+        app.MapGet("api/GamesByName/{GameName}", async (IMediator mediator, string gameName) =>
         {
             var result = await mediator.Send(new GetGamesByNameQuery(gameName));
 
