@@ -1,98 +1,133 @@
-//using AutoFixture;
-//using AutoFixture.Xunit2;
-//using CleanArchitecture.Infrastructure.Repositories;
-//using FluentAssertions;
-//using Microsoft.EntityFrameworkCore;
-//using GameConsoleDomain = CleanArchitecture.Domain.Entities.GameConsole;
-//using GameConsoleModel = CleanArchitecture.Infrastructure.Models.GameConsole;
+using AutoFixture;
+using FluentAssertions;
+using GameShop.Domain.Entities;
+using GameShop.Infrastructure.Data;
+using GameShop.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 
-//namespace GameShop.Infrastructure.UnitTests.Repositories;
+namespace GameShop.Infrastructure.UnitTests.Repositories;
 
-//public class GameConsoleRepositoryTests
-//{
-//    public sealed class GetAllGameConsoles : RepositoryTestsBase<GameConsoleRepository>
-//    {
-//        [Theory, AutoData]
-//        public async Task Should_get_games_consoles(
-//        IReadOnlyCollection<GameConsoleDomain> existingGameConsoles)
-//        {
-//            var existingGameModels = Mapper.Map<IReadOnlyCollection<GameConsoleModel>>(existingGameConsoles);
-//            await DatabaseContext.GameConsoles.AddRangeAsync(existingGameModels);
-//            await DatabaseContext.SaveChangesAsync();
+public class GameConsoleRepositoryTests
+{
+    public static async Task<IReadOnlyCollection<GameConsole>>
+        CreateExistingGameConsoles(
+        IFixture fixture,
+        WriteReadDatabaseContext writeReadDbContext)
+    {
+        var existingGameConsoles = fixture.Build<GameConsole>()
+            .Without(gc => gc.Games)
+            .CreateMany()
+            .ToArray();
 
-//            var actual = await RepositoryUnderTesting.GetAllGameConsoles();
+        await writeReadDbContext.AddRangeAsync(existingGameConsoles);
+        await writeReadDbContext.SaveChangesAsync();
 
-//            actual.Should().BeEquivalentTo(existingGameConsoles);
-//        }
-//    }
+        writeReadDbContext.ChangeTracker.Clear();
 
-//    public sealed class GetGameConsole : RepositoryTestsBase<GameConsoleRepository>
-//    {
-//        [Theory, AutoData]
-//        public async Task Should_get_games_console_by_id(
-//            IReadOnlyCollection<GameConsoleDomain> existingGameConsoles)
-//        {
-//            var existingGameModels = Mapper.Map<IReadOnlyCollection<GameConsoleModel>>(existingGameConsoles);
-//            await DatabaseContext.GameConsoles.AddRangeAsync(existingGameModels);
-//            await DatabaseContext.SaveChangesAsync();
+        return existingGameConsoles;
+    }
 
-//            var expectedDomain = existingGameConsoles.First();
-//            var actual = await RepositoryUnderTesting.GetGameConsole(expectedDomain.Id);
-//            actual.Should().BeEquivalentTo(expectedDomain);
-//        }
-//    }
+    public sealed class GetAllGameConsoles : RepositoryTestsBase<GameConsoleRepository>
+    {
+        [Fact]
+        public async Task Should_get_all_game_consoles()
+        {
+            // Arrange
+            var existingGameConsoles = await CreateExistingGameConsoles(Fixture, WriteReadDbContext);
+            var expected = existingGameConsoles;
 
-//    public sealed class UpdateGameConsole : RepositoryTestsBase<GameConsoleRepository>
-//    {
-//        [Theory, AutoData]
-//        public async Task Should_update_games_console(
-//        GameConsoleDomain updatedGameConsole)
-//        {
-//            var existingGameConsole = Fixture.Build<GameConsoleModel>()
-//                .Without(c => c.Games)
-//                .Create();
-//            await DatabaseContext.GameConsoles.AddAsync(existingGameConsole);
-//            await DatabaseContext.SaveChangesAsync();
+            // Act
+            var actual = await RepositoryUnderTesting.GetAllGameConsoles(default);
 
-//            var updatedGameConsoleFixed = updatedGameConsole with { Id = existingGameConsole.Id };
-//            await RepositoryUnderTesting.UpdateGameConsole(updatedGameConsoleFixed);
+            // Assert
+            actual.Should().BeEquivalentTo(expected, opts => opts
+                .Excluding(e => e.Games));
+        }
+    }
 
-//            var expected = Mapper.Map<GameConsoleModel>(updatedGameConsoleFixed);
-//            var actual = await DatabaseContext.GameConsoles.SingleAsync();
-//            actual.Should().BeEquivalentTo(expected);
-//        }
-//    }
+    public sealed class GetGameConsole : RepositoryTestsBase<GameConsoleRepository>
+    {
+        [Fact]
+        public async Task Should_get_game_console_by_id()
+        {
+            // Arrange
+            var existingGameConsoles = await CreateExistingGameConsoles(Fixture, WriteReadDbContext);
+            var gameConsoleToFind = existingGameConsoles.First();
 
-//    public sealed class AddGameConsole : RepositoryTestsBase<GameConsoleRepository>
-//    {
-//        [Theory, AutoData]
-//        public async Task Should_add_games_console(
-//        GameConsoleDomain newGameConsoleDomain)
-//        {
-//            var expected = Mapper.Map<GameConsoleModel>(newGameConsoleDomain);
+            // Act
+            var actual = await RepositoryUnderTesting.GetGameConsole(gameConsoleToFind.Id, default);
 
-//            await RepositoryUnderTesting.AddGameConsole(newGameConsoleDomain);
+            // Assert
+            actual.Should().BeEquivalentTo(gameConsoleToFind, opts => opts
+                .Excluding(e => e.Games));
+        }
+    }
 
-//            var actual = await DatabaseContext.GameConsoles.SingleAsync();
-//            actual.Should().BeEquivalentTo(expected);
-//        }
-//    }
+    public sealed class AddGameConsole : RepositoryTestsBase<GameConsoleRepository>
+    {
+        [Fact]
+        public async Task Should_add_game_console()
+        {
+            // Arrange
+            var newGameConsole = Fixture.Build<GameConsole>()
+                .Without(gc => gc.Games)
+                .Create();
+            var expected = newGameConsole;
 
-//    public sealed class DeleteGameConsole : RepositoryTestsBase<GameConsoleRepository>
-//    {
-//        [Fact]
-//        public async Task Should_delete_games_console()
-//        {
-//            var existingGameConsole = Fixture.Build<GameConsoleModel>()
-//                .Without(c => c.Games)
-//                .Create();
-//            await DatabaseContext.GameConsoles.AddAsync(existingGameConsole);
-//            await DatabaseContext.SaveChangesAsync();
+            // Act
+            await RepositoryUnderTesting.AddGameConsole(newGameConsole, default);
 
-//            await RepositoryUnderTesting.DeleteGameConsole(existingGameConsole.Id);
+            // Assert
+            var actualReadOnlyDbContext = await ReadOnlyDbContext.GameConsoles.SingleAsync();
+            var actualWriteReadDbContext = await WriteReadDbContext.GameConsoles.SingleAsync();
+            actualReadOnlyDbContext.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.Games));
+            actualWriteReadDbContext.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.Games));
+        }
+    }
 
-//            var actual = await DatabaseContext.GameConsoles.FirstOrDefaultAsync();
-//            actual.Should().BeNull();
-//        }
-//    }
-//}
+    public sealed class UpdateGameConsole : RepositoryTestsBase<GameConsoleRepository>
+    {
+        [Fact]
+        public async Task Should_update_game_console()
+        {
+            // Arrange
+            var existingGameConsoles = await CreateExistingGameConsoles(Fixture, WriteReadDbContext);
+            var existingGameConsoleToUpdate = existingGameConsoles.First();
+            var updatedGameConsole = Fixture.Build<GameConsole>()
+                .Without(gc => gc.Games)
+                .With(gc => gc.Id, existingGameConsoleToUpdate.Id)
+                .Create();
+
+            var expected = updatedGameConsole;
+
+            // Act
+            await RepositoryUnderTesting.UpdateGameConsole(updatedGameConsole, default);
+
+            // Assert
+            var actualReadOnly = await ReadOnlyDbContext.GameConsoles.FirstAsync();
+            var actualWriteRead = await WriteReadDbContext.GameConsoles.FirstAsync();
+            actualReadOnly.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.Games));
+            actualWriteRead.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.Games));
+        }
+    }
+
+    public sealed class DeleteGameConsole : RepositoryTestsBase<GameConsoleRepository>
+    {
+        [Fact]
+        public async Task Should_delete_game_console()
+        {
+            // Arrange
+            var existingGameConsoles = await CreateExistingGameConsoles(Fixture, WriteReadDbContext);
+            var gameConsoleToDelete = existingGameConsoles.First();
+
+            // Act
+            await RepositoryUnderTesting.DeleteGameConsole(gameConsoleToDelete, default);
+
+            // Assert
+            var actualReadOnly = await ReadOnlyDbContext.GameConsoles.Where(gc => gc.Id == gameConsoleToDelete.Id).ToArrayAsync();
+            var actualWriteRead = await WriteReadDbContext.GameConsoles.Where(gc => gc.Id == gameConsoleToDelete.Id).ToArrayAsync();
+            actualReadOnly.Should().BeEmpty();
+            actualWriteRead.Should().BeEmpty();
+        }
+    }
+}
