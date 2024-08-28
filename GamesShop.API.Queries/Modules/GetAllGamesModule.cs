@@ -11,7 +11,11 @@ public class GetAllGamesModule : ICarterModule
     {
         app.MapGet("api/Games", async (IMediator mediator) =>
         {
-            return ResultChecker.CheckResult(await mediator.Send(new GetAllGamesQuery()));
+            var result = await mediator.Send(new GetAllGamesQuery());
+
+            return result.IsSuccess ?
+                Results.Ok(result.Value) :
+                Results.BadRequest(result.Error);
         })
         .WithOpenApi(operation =>
         {
