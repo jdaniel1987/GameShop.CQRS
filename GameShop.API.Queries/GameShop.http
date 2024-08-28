@@ -1,6 +1,6 @@
 @GameShopAPIQueries_HostAddress  = http://localhost:5199
 
-GET {{GameShopAPIQueries_HostAddress }}/api/GamesConsoles/
+GET {{GameShopAPIQueries_HostAddress }}/api/GameConsoles/
 Accept: application/json
 
 ###

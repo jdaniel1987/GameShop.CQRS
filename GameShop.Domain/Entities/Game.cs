@@ -12,7 +12,7 @@ public class Game
 
     public required Price Price { get; set; }
 
-    public required int GamesConsoleId { get; set; }
+    public required int GameConsoleId { get; set; }
 
-    public virtual GamesConsole? GamesConsole { get; set; }
+    public virtual GameConsole? GameConsole { get; set; }
 }

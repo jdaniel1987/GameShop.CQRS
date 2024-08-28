@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.API.Commands", "Ga
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Application", "GameShop.Application\GameShop.Application.csproj", "{61B2D1EA-4B50-4746-AEF2-68384E194C1D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gameshop.Queries.IntegrationTests", "GameShop.Queries.IntegrationTests\Gameshop.Queries.IntegrationTests.csproj", "{FE2C51FD-0E59-4EBC-B07D-7199B45DD2B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Queries.IntegrationTests", "GameShop.Queries.IntegrationTests\GameShop.Queries.IntegrationTests.csproj", "{FE2C51FD-0E59-4EBC-B07D-7199B45DD2B7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Commands.IntegrationTests", "GameShop.Commands.IntegrationTests\GameShop.Commands.IntegrationTests.csproj", "{504AA152-B29E-4037-BC39-8A36FD41FF04}"
 EndProject

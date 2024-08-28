@@ -7,5 +7,5 @@ public record UpdateGameCommand(
     int Id,
     string Name,
     string Publisher,
-    int GamesConsoleId,
+    int GameConsoleId,
     double Price) : IRequest<IResult<UpdateGameResponse>>;

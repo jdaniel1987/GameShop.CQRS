@@ -29,12 +29,12 @@ public class GameConfiguration : IEntityTypeConfiguration<Game>
                 v => v.Value,
                 v => Price.Create(v));
 
-        builder.Property(p => p.GamesConsoleId)
+        builder.Property(p => p.GameConsoleId)
             .IsRequired();
 
-        builder.HasOne(e => e.GamesConsole)
+        builder.HasOne(e => e.GameConsole)
                .WithMany(c => c.Games)
-               .HasForeignKey(e => e.GamesConsoleId)
+               .HasForeignKey(e => e.GameConsoleId)
                .OnDelete(DeleteBehavior.Cascade);
     }
 }

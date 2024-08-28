@@ -14,19 +14,19 @@ public class GetGamesByNameIntegrationTests : ApiBaseTests
     {
         // Arrange
         var nameToFind = fixture.Create<string>();
-        var existingGamesConsole = fixture.Build<GamesConsole>()
+        var existingGameConsole = fixture.Build<GameConsole>()
             .Without(gc => gc.Games)
             .Create();
         var existingGames1 = fixture.Build<Game>()
             .With(g => g.Name, $"{fixture.Create<string>()}{nameToFind}{fixture.Create<string>()}")
-            .With(g => g.GamesConsole, existingGamesConsole)
+            .With(g => g.GameConsole, existingGameConsole)
             .CreateMany();
         var existingGames2 = fixture.Build<Game>()
-            .With(g => g.GamesConsoleId, existingGamesConsole.Id)
-            .With(g => g.GamesConsole, existingGamesConsole)
+            .With(g => g.GameConsoleId, existingGameConsole.Id)
+            .With(g => g.GameConsole, existingGameConsole)
             .CreateMany(); 
         var allGames = existingGames1.Concat(existingGames2);
-        await ReadOnlyDbContext.AddAsync(existingGamesConsole);
+        await ReadOnlyDbContext.AddAsync(existingGameConsole);
         await ReadOnlyDbContext.AddRangeAsync(allGames);
         await ReadOnlyDbContext.SaveChangesAsync();
 
@@ -36,8 +36,8 @@ public class GetGamesByNameIntegrationTests : ApiBaseTests
                 g.Name,
                 g.Publisher,
                 g.Price.Value,
-                g.GamesConsoleId,
-                g.GamesConsole!.Name))
+                g.GameConsoleId,
+                g.GameConsole!.Name))
                 .ToImmutableArray());
 
         // Act

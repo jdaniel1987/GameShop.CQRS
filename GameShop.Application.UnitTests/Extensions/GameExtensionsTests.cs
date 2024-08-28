@@ -33,7 +33,7 @@ public class GameExtensionsTests
             game.Name.Should().Be(command.Name);
             game.Publisher.Should().Be(command.Publisher);
             game.Price.Value.Should().Be(command.Price);
-            game.GamesConsoleId.Should().Be(command.GamesConsoleId);
+            game.GameConsoleId.Should().Be(command.GameConsoleId);
         }
     }
 
@@ -52,7 +52,7 @@ public class GameExtensionsTests
             game.Name.Should().Be(command.Name);
             game.Publisher.Should().Be(command.Publisher);
             game.Price.Value.Should().Be(command.Price);
-            game.GamesConsoleId.Should().Be(command.GamesConsoleId);
+            game.GameConsoleId.Should().Be(command.GameConsoleId);
         }
     }
 
@@ -64,7 +64,7 @@ public class GameExtensionsTests
         {
             // Arrange
             var game = fixture.Build<Game>()
-                .With(g => g.GamesConsole, fixture.Build<GamesConsole>()
+                .With(g => g.GameConsole, fixture.Build<GameConsole>()
                     .Without(gc => gc.Games)
                     .Create())
                 .Create();
@@ -89,7 +89,7 @@ public class GameExtensionsTests
         {
             // Arrange
             var games = fixture.Build<Game>()
-                .With(g => g.GamesConsole, fixture.Build<GamesConsole>()
+                .With(g => g.GameConsole, fixture.Build<GameConsole>()
                     .Without(gc => gc.Games)
                     .Create())
                 .CreateMany()
@@ -109,7 +109,7 @@ public class GameExtensionsTests
         {
             // Arrange
             var games = fixture.Build<Game>()
-                .With(g => g.GamesConsole, fixture.Build<GamesConsole>()
+                .With(g => g.GameConsole, fixture.Build<GameConsole>()
                     .Without(gc => gc.Games)
                     .Create())
                 .CreateMany()
@@ -129,7 +129,7 @@ public class GameExtensionsTests
         {
             // Arrange
             var games = fixture.Build<Game>()
-                .With(g => g.GamesConsole, fixture.Build<GamesConsole>()
+                .With(g => g.GameConsole, fixture.Build<GameConsole>()
                     .Without(gc => gc.Games)
                     .Create())
                 .CreateMany()
@@ -152,7 +152,7 @@ public class GameExtensionsTests
         {
             // Arrange
             var game = fixture.Build<Game>()
-                .With(g => g.GamesConsole, fixture.Build<GamesConsole>()
+                .With(g => g.GameConsole, fixture.Build<GameConsole>()
                     .Without(gc => gc.Games)
                     .Create())
                 .Create();
@@ -171,7 +171,7 @@ public class GameExtensionsTests
         {
             // Arrange
             var game = fixture.Build<Game>()
-                .With(g => g.GamesConsole, fixture.Build<GamesConsole>()
+                .With(g => g.GameConsole, fixture.Build<GameConsole>()
                     .Without(gc => gc.Games)
                     .Create())
                 .Create();
@@ -190,7 +190,7 @@ public class GameExtensionsTests
         {
             // Arrange
             var game = fixture.Build<Game>()
-                .With(g => g.GamesConsole, fixture.Build<GamesConsole>()
+                .With(g => g.GameConsole, fixture.Build<GameConsole>()
                     .Without(gc => gc.Games)
                     .Create())
                 .Create();

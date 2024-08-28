@@ -7,7 +7,7 @@ public static class DatabaseSeed
 {
     public static void SeedData(BaseDatabaseContext context)
     {
-        var gamesConsole1 = new GamesConsole
+        var gameConsole1 = new GameConsole
         {
             Id = 1,
             Name = "PlayStation 4",
@@ -15,7 +15,7 @@ public static class DatabaseSeed
             Price = Price.Create(249),
             Games = new List<Game>(),
         }; 
-        var gamesConsole2 = new GamesConsole
+        var gameConsole2 = new GameConsole
         {
             Id = 2,
             Name = "PlayStation 5",
@@ -23,7 +23,7 @@ public static class DatabaseSeed
             Price = Price.Create(549),
             Games = new List<Game>(),
         };
-        var gamesConsole3 = new GamesConsole
+        var gameConsole3 = new GameConsole
         {
             Id = 3,
             Name = "Xbox Series X",
@@ -31,7 +31,7 @@ public static class DatabaseSeed
             Price = Price.Create(599),
             Games = new List<Game>(),
         };
-        var gamesConsole4 = new GamesConsole
+        var gameConsole4 = new GameConsole
         {
             Id = 4,
             Name = "Nintendo Switch",
@@ -41,10 +41,10 @@ public static class DatabaseSeed
         };
 
         //Seeding Consoles
-        context.GamesConsoles.Add(gamesConsole1);
-        context.GamesConsoles.Add(gamesConsole2);
-        context.GamesConsoles.Add(gamesConsole3);
-        context.GamesConsoles.Add(gamesConsole4);
+        context.GameConsoles.Add(gameConsole1);
+        context.GameConsoles.Add(gameConsole2);
+        context.GameConsoles.Add(gameConsole3);
+        context.GameConsoles.Add(gameConsole4);
 
         //Seeding Games
         context.Games.Add(new Game
@@ -53,8 +53,8 @@ public static class DatabaseSeed
             Name = "Final Fantasy VII Remake",
             Publisher = "Square Enix",
             Price = Price.Create(69),
-            GamesConsoleId = 1,
-            GamesConsole = gamesConsole1,
+            GameConsoleId = 1,
+            GameConsole = gameConsole1,
         });
         context.Games.Add(new Game
         {
@@ -62,8 +62,8 @@ public static class DatabaseSeed
             Name = "Final Fantasy VII Remake",
             Publisher = "Square Enix",
             Price = Price.Create(79),
-            GamesConsoleId = 1,
-            GamesConsole = gamesConsole2,
+            GameConsoleId = 1,
+            GameConsole = gameConsole2,
         });
         context.Games.Add(new Game
         {
@@ -71,8 +71,8 @@ public static class DatabaseSeed
             Name = "Horizon Forbidden West",
             Publisher = "Sony Interactive Entertainment",
             Price = Price.Create(79),
-            GamesConsoleId = 2,
-            GamesConsole = gamesConsole2,
+            GameConsoleId = 2,
+            GameConsole = gameConsole2,
         });
         context.Games.Add(new Game
         {
@@ -80,8 +80,8 @@ public static class DatabaseSeed
             Name = "The Legend of Zelda: Tears of the Kingdom",
             Publisher = "Nintendo",
             Price = Price.Create(59),
-            GamesConsoleId = 4,
-            GamesConsole = gamesConsole4,
+            GameConsoleId = 4,
+            GameConsole = gameConsole4,
         });
         context.Games.Add(new Game
         {
@@ -89,8 +89,8 @@ public static class DatabaseSeed
             Name = "Xenoblade Chronicles 3",
             Publisher = "Monolith Soft",
             Price = Price.Create(59),
-            GamesConsoleId = 4,
-            GamesConsole = gamesConsole4,
+            GameConsoleId = 4,
+            GameConsole = gameConsole4,
         });
         context.Games.Add(new Game
         {
@@ -98,8 +98,8 @@ public static class DatabaseSeed
             Name = "Halo Infinite",
             Publisher = "Xbox Game Studios",
             Price = Price.Create(69),
-            GamesConsoleId = 3,
-            GamesConsole = gamesConsole3,
+            GameConsoleId = 3,
+            GameConsole = gameConsole3,
         });
         context.Games.Add(new Game
         {
@@ -107,8 +107,8 @@ public static class DatabaseSeed
             Name = "Crisis Core Final Fantasy VII Reunion",
             Publisher = "Square Enix",
             Price = Price.Create(69),
-            GamesConsoleId = 4,
-            GamesConsole = gamesConsole4
+            GameConsoleId = 4,
+            GameConsole = gameConsole4
         });
 
         context.SaveChanges();

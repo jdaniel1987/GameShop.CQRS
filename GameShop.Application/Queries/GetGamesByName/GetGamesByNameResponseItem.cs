@@ -5,5 +5,5 @@ public record GetGamesByNameResponseItem(
     string Name,
     string Publisher,
     double Price,
-    int GamesConsoleId,
-    string GamesConsoleName);
+    int GameConsoleId,
+    string GameConsoleName);

@@ -16,7 +16,7 @@ public class UpdateGameCommandValidatorTests
     public void Validator_Should_Have_Error_When_Id_Is_Zero()
     {
         // Arrange
-        var command = new UpdateGameCommand(Id: 0, Name: "Valid Name", Publisher: "Valid Publisher", GamesConsoleId: 1, Price: 10.0);
+        var command = new UpdateGameCommand(Id: 0, Name: "Valid Name", Publisher: "Valid Publisher", GameConsoleId: 1, Price: 10.0);
 
         // Act
         var result = _validator.TestValidate(command);
@@ -30,7 +30,7 @@ public class UpdateGameCommandValidatorTests
     public void Validator_Should_Have_Error_When_Id_Is_Negative()
     {
         // Arrange
-        var command = new UpdateGameCommand(Id: -1, Name: "Valid Name", Publisher: "Valid Publisher", GamesConsoleId: 1, Price: 10.0);
+        var command = new UpdateGameCommand(Id: -1, Name: "Valid Name", Publisher: "Valid Publisher", GameConsoleId: 1, Price: 10.0);
 
         // Act
         var result = _validator.TestValidate(command);
@@ -44,7 +44,7 @@ public class UpdateGameCommandValidatorTests
     public void Validator_Should_Have_Error_When_Name_Is_Empty()
     {
         // Arrange
-        var command = new UpdateGameCommand(Id: 1, Name: "", Publisher: "Valid Publisher", GamesConsoleId: 1, Price: 10.0);
+        var command = new UpdateGameCommand(Id: 1, Name: "", Publisher: "Valid Publisher", GameConsoleId: 1, Price: 10.0);
 
         // Act
         var result = _validator.TestValidate(command);
@@ -58,7 +58,7 @@ public class UpdateGameCommandValidatorTests
     public void Validator_Should_Have_Error_When_Name_Exceeds_MaxLength()
     {
         // Arrange
-        var command = new UpdateGameCommand(Id: 1, Name: new string('A', 101), Publisher: "Valid Publisher", GamesConsoleId: 1, Price: 10.0);
+        var command = new UpdateGameCommand(Id: 1, Name: new string('A', 101), Publisher: "Valid Publisher", GameConsoleId: 1, Price: 10.0);
 
         // Act
         var result = _validator.TestValidate(command);
@@ -72,7 +72,7 @@ public class UpdateGameCommandValidatorTests
     public void Validator_Should_Have_Error_When_Publisher_Is_Empty()
     {
         // Arrange
-        var command = new UpdateGameCommand(Id: 1, Name: "Valid Name", Publisher: "", GamesConsoleId: 1, Price: 10.0);
+        var command = new UpdateGameCommand(Id: 1, Name: "Valid Name", Publisher: "", GameConsoleId: 1, Price: 10.0);
 
         // Act
         var result = _validator.TestValidate(command);
@@ -86,7 +86,7 @@ public class UpdateGameCommandValidatorTests
     public void Validator_Should_Have_Error_When_Publisher_Exceeds_MaxLength()
     {
         // Arrange
-        var command = new UpdateGameCommand(Id: 1, Name: "Valid Name", Publisher: new string('B', 101), GamesConsoleId: 1, Price: 10.0);
+        var command = new UpdateGameCommand(Id: 1, Name: "Valid Name", Publisher: new string('B', 101), GameConsoleId: 1, Price: 10.0);
 
         // Act
         var result = _validator.TestValidate(command);
@@ -97,38 +97,38 @@ public class UpdateGameCommandValidatorTests
     }
 
     [Fact]
-    public void Validator_Should_Have_Error_When_GamesConsoleId_Is_Zero()
+    public void Validator_Should_Have_Error_When_GameConsoleId_Is_Zero()
     {
         // Arrange
-        var command = new UpdateGameCommand(Id: 1, Name: "Valid Name", Publisher: "Valid Publisher", GamesConsoleId: 0, Price: 10.0);
+        var command = new UpdateGameCommand(Id: 1, Name: "Valid Name", Publisher: "Valid Publisher", GameConsoleId: 0, Price: 10.0);
 
         // Act
         var result = _validator.TestValidate(command);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(c => c.GamesConsoleId)
-            .WithErrorMessage("GamesConsoleId must be a positive integer.");
+        result.ShouldHaveValidationErrorFor(c => c.GameConsoleId)
+            .WithErrorMessage("GameConsoleId must be a positive integer.");
     }
 
     [Fact]
-    public void Validator_Should_Have_Error_When_GamesConsoleId_Is_Negative()
+    public void Validator_Should_Have_Error_When_GameConsoleId_Is_Negative()
     {
         // Arrange
-        var command = new UpdateGameCommand(Id: 1, Name: "Valid Name", Publisher: "Valid Publisher", GamesConsoleId: -1, Price: 10.0);
+        var command = new UpdateGameCommand(Id: 1, Name: "Valid Name", Publisher: "Valid Publisher", GameConsoleId: -1, Price: 10.0);
 
         // Act
         var result = _validator.TestValidate(command);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(c => c.GamesConsoleId)
-            .WithErrorMessage("GamesConsoleId must be a positive integer.");
+        result.ShouldHaveValidationErrorFor(c => c.GameConsoleId)
+            .WithErrorMessage("GameConsoleId must be a positive integer.");
     }
 
     [Fact]
     public void Validator_Should_Have_Error_When_Price_Is_Negative()
     {
         // Arrange
-        var command = new UpdateGameCommand(Id: 1, Name: "Valid Name", Publisher: "Valid Publisher", GamesConsoleId: 1, Price: -1.0);
+        var command = new UpdateGameCommand(Id: 1, Name: "Valid Name", Publisher: "Valid Publisher", GameConsoleId: 1, Price: -1.0);
 
         // Act
         var result = _validator.TestValidate(command);
@@ -142,7 +142,7 @@ public class UpdateGameCommandValidatorTests
     public void Validator_Should_Not_Have_Error_For_Valid_Command()
     {
         // Arrange
-        var command = new UpdateGameCommand(Id: 1, Name: "Valid Name", Publisher: "Valid Publisher", GamesConsoleId: 1, Price: 10.0);
+        var command = new UpdateGameCommand(Id: 1, Name: "Valid Name", Publisher: "Valid Publisher", GameConsoleId: 1, Price: 10.0);
 
         // Act
         var result = _validator.TestValidate(command);

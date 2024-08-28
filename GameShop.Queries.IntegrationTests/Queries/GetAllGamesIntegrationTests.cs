@@ -13,19 +13,19 @@ public class GetAllGamesIntegrationTests : ApiBaseTests
         IFixture fixture)
     {
         // Arrange
-        var existingGamesConsoles = fixture.Build<GamesConsole>()
+        var existingGameConsoles = fixture.Build<GameConsole>()
             .Without(gc => gc.Games)
             .CreateMany();
         var existingGames1 = fixture.Build<Game>()
-            .With(g => g.GamesConsoleId, existingGamesConsoles.First().Id)
-            .With(g => g.GamesConsole, existingGamesConsoles.First())
+            .With(g => g.GameConsoleId, existingGameConsoles.First().Id)
+            .With(g => g.GameConsole, existingGameConsoles.First())
             .CreateMany();
         var existingGames2 = fixture.Build<Game>()
-            .With(g => g.GamesConsoleId, existingGamesConsoles.Last().Id)
-            .With(g => g.GamesConsole, existingGamesConsoles.Last())
+            .With(g => g.GameConsoleId, existingGameConsoles.Last().Id)
+            .With(g => g.GameConsole, existingGameConsoles.Last())
             .CreateMany();
         var allGames = existingGames1.Concat(existingGames2);
-        await ReadOnlyDbContext.AddRangeAsync(existingGamesConsoles);
+        await ReadOnlyDbContext.AddRangeAsync(existingGameConsoles);
         await ReadOnlyDbContext.AddRangeAsync(allGames);
         await ReadOnlyDbContext.SaveChangesAsync();
 
@@ -35,8 +35,8 @@ public class GetAllGamesIntegrationTests : ApiBaseTests
                 g.Name,
                 g.Publisher,
                 g.Price.Value,
-                g.GamesConsoleId,
-                g.GamesConsole!.Name))
+                g.GameConsoleId,
+                g.GameConsole!.Name))
             .ToImmutableArray());
 
         // Act

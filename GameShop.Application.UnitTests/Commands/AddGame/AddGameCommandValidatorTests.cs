@@ -19,7 +19,7 @@ public class AddGameCommandValidatorTests
         var command = new AddGameCommand(
             Name: "",
             Publisher: "Valid Publisher",
-            GamesConsoleId: 1,
+            GameConsoleId: 1,
             Price: 10.0);
 
         // Act
@@ -37,7 +37,7 @@ public class AddGameCommandValidatorTests
         var command = new AddGameCommand(
             Name: new string('A', 101), // 101 characters
             Publisher: "Valid Publisher",
-            GamesConsoleId: 1,
+            GameConsoleId: 1,
             Price: 10.0);
 
         // Act
@@ -55,7 +55,7 @@ public class AddGameCommandValidatorTests
         var command = new AddGameCommand(
             Name: "Valid Name",
             Publisher: "",
-            GamesConsoleId: 1,
+            GameConsoleId: 1,
             Price: 10.0);
 
         // Act
@@ -73,7 +73,7 @@ public class AddGameCommandValidatorTests
         var command = new AddGameCommand(
             Name: "Valid Name",
             Publisher: new string('B', 101), // 101 characters
-            GamesConsoleId: 1,
+            GameConsoleId: 1,
             Price: 10.0);
 
         // Act
@@ -85,21 +85,21 @@ public class AddGameCommandValidatorTests
     }
 
     [Fact]
-    public void Validator_Should_Have_Error_When_GamesConsoleId_Is_Not_Positive()
+    public void Validator_Should_Have_Error_When_GameConsoleId_Is_Not_Positive()
     {
         // Arrange
         var command = new AddGameCommand(
             Name: "Valid Name",
             Publisher: "Valid Publisher",
-            GamesConsoleId: 0,
+            GameConsoleId: 0,
             Price: 10.0);
 
         // Act
         var result = _validator.TestValidate(command);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(c => c.GamesConsoleId)
-            .WithErrorMessage("GamesConsoleId must be a positive integer.");
+        result.ShouldHaveValidationErrorFor(c => c.GameConsoleId)
+            .WithErrorMessage("GameConsoleId must be a positive integer.");
     }
 
     [Fact]
@@ -109,7 +109,7 @@ public class AddGameCommandValidatorTests
         var command = new AddGameCommand(
             Name: "Valid Name",
             Publisher: "Valid Publisher",
-            GamesConsoleId: 1,
+            GameConsoleId: 1,
             Price: -1.0);
 
         // Act
@@ -127,7 +127,7 @@ public class AddGameCommandValidatorTests
         var command = new AddGameCommand(
             Name: "Valid Name",
             Publisher: "Valid Publisher",
-            GamesConsoleId: 1,
+            GameConsoleId: 1,
             Price: 10.0);
 
         // Act

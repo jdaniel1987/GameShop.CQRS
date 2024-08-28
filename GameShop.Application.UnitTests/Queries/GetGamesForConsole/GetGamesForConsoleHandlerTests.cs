@@ -22,53 +22,53 @@ public class GetGamesForConsoleHandlerTests
     }
 
     [Theory, AutoData]
-    public async Task Handle_ShouldReturnFailureResult_WhenGamesConsoleIsNotFound(
-        [Frozen] Mock<IGamesConsoleRepository> gamesConsoleRepositoryMock,
+    public async Task Handle_ShouldReturnFailureResult_WhenGameConsoleIsNotFound(
+        [Frozen] Mock<IGameConsoleRepository> gameConsoleRepositoryMock,
         [Frozen] Mock<IGameRepository> gameRepositoryMock,
         GetGamesForConsoleQuery query)
     {
         // Arrange
-        var handler = new GetGamesForConsoleHandler(gameRepositoryMock.Object, gamesConsoleRepositoryMock.Object);
+        var handler = new GetGamesForConsoleHandler(gameRepositoryMock.Object, gameConsoleRepositoryMock.Object);
 
-        gamesConsoleRepositoryMock.Setup(repo => repo.GetGamesConsole(query.GamesConsoleId, It.IsAny<CancellationToken>()))
-            .ReturnsAsync((GamesConsole?)null);
+        gameConsoleRepositoryMock.Setup(repo => repo.GetGameConsole(query.GameConsoleId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync((GameConsole?)null);
 
         // Act
         var result = await handler.Handle(query, CancellationToken.None);
 
         // Assert
         result.IsFailure.Should().BeTrue();
-        result.Error.Should().Be($"Console with ID {query.GamesConsoleId} does not exist");
+        result.Error.Should().Be($"Console with ID {query.GameConsoleId} does not exist");
     }
 
     [Theory, AutoData]
     public async Task Handle_ShouldReturnSuccessResult_WhenGamesAreFoundForConsole(
         [Frozen] Mock<IGameRepository> gameRepositoryMock,
-        [Frozen] Mock<IGamesConsoleRepository> gamesConsoleRepositoryMock,
+        [Frozen] Mock<IGameConsoleRepository> gameConsoleRepositoryMock,
         GetGamesForConsoleQuery query,
         IFixture fixture)
     {
         // Arrange
-        var handler = new GetGamesForConsoleHandler(gameRepositoryMock.Object, gamesConsoleRepositoryMock.Object);
+        var handler = new GetGamesForConsoleHandler(gameRepositoryMock.Object, gameConsoleRepositoryMock.Object);
 
         var games = fixture.Build<Game>()
-            .With(g => g.GamesConsole, fixture.Build<GamesConsole>()
+            .With(g => g.GameConsole, fixture.Build<GameConsole>()
                 .Without(gc => gc.Games)
                 .Create())
             .CreateMany()
             .ToImmutableArray();
 
-        var gamesConsole = fixture.Build<GamesConsole>()
+        var gameConsole = fixture.Build<GameConsole>()
             .Without(gc => gc.Games)
             .Create();
 
         gameRepositoryMock
-            .Setup(repo => repo.GetGamesForConsole(query.GamesConsoleId, It.IsAny<CancellationToken>()))
+            .Setup(repo => repo.GetGamesForConsole(query.GameConsoleId, It.IsAny<CancellationToken>()))
             .ReturnsAsync(games);
 
-        gamesConsoleRepositoryMock
-            .Setup(repo => repo.GetGamesConsole(query.GamesConsoleId, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(gamesConsole);
+        gameConsoleRepositoryMock
+            .Setup(repo => repo.GetGameConsole(query.GameConsoleId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(gameConsole);
 
         var expected = new GetGamesForConsoleResponse(games
             .Select(g => new GetGamesForConsoleResponseItem(
@@ -76,15 +76,15 @@ public class GetGamesForConsoleHandlerTests
                 g.Name,
                 g.Publisher,
                 g.Price.Value,
-                g.GamesConsoleId,
-                g.GamesConsole!.Name))
+                g.GameConsoleId,
+                g.GameConsole!.Name))
             .ToImmutableArray());
 
         // Act
         var result = await handler.Handle(query, CancellationToken.None);
 
         // Assert
-        gameRepositoryMock.Verify(repo => repo.GetGamesForConsole(query.GamesConsoleId, It.IsAny<CancellationToken>()), Times.Once);
+        gameRepositoryMock.Verify(repo => repo.GetGamesForConsole(query.GameConsoleId, It.IsAny<CancellationToken>()), Times.Once);
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().BeEquivalentTo(expected);
     }
@@ -92,30 +92,30 @@ public class GetGamesForConsoleHandlerTests
     [Theory, AutoData]
     public async Task Handle_ShouldReturnEmptyResponse_WhenNoGamesAreFound(
         [Frozen] Mock<IGameRepository> gameRepositoryMock,
-        [Frozen] Mock<IGamesConsoleRepository> gamesConsoleRepositoryMock,
+        [Frozen] Mock<IGameConsoleRepository> gameConsoleRepositoryMock,
         GetGamesForConsoleQuery query,
         IFixture fixture)
     {
         // Arrange
-        var handler = new GetGamesForConsoleHandler(gameRepositoryMock.Object, gamesConsoleRepositoryMock.Object);
+        var handler = new GetGamesForConsoleHandler(gameRepositoryMock.Object, gameConsoleRepositoryMock.Object);
 
-        var gamesConsole = fixture.Build<GamesConsole>()
+        var gameConsole = fixture.Build<GameConsole>()
             .Without(gc => gc.Games)
             .Create();
 
         gameRepositoryMock
-            .Setup(repo => repo.GetGamesForConsole(query.GamesConsoleId, It.IsAny<CancellationToken>()))
+            .Setup(repo => repo.GetGamesForConsole(query.GameConsoleId, It.IsAny<CancellationToken>()))
             .ReturnsAsync([]);
 
-        gamesConsoleRepositoryMock
-            .Setup(repo => repo.GetGamesConsole(query.GamesConsoleId, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(gamesConsole);
+        gameConsoleRepositoryMock
+            .Setup(repo => repo.GetGameConsole(query.GameConsoleId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(gameConsole);
 
         // Act
         var result = await handler.Handle(query, CancellationToken.None);
 
         // Assert
-        gameRepositoryMock.Verify(repo => repo.GetGamesForConsole(query.GamesConsoleId, It.IsAny<CancellationToken>()), Times.Once);
+        gameRepositoryMock.Verify(repo => repo.GetGamesForConsole(query.GameConsoleId, It.IsAny<CancellationToken>()), Times.Once);
         result.IsSuccess.Should().BeTrue();
         result.Value.Games.Should().BeEmpty();
     }

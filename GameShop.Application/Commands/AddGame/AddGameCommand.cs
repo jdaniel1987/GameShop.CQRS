@@ -6,5 +6,5 @@ namespace GameShop.Application.Commands.AddGame;
 public record AddGameCommand(
     string Name,
     string Publisher,
-    int GamesConsoleId,
+    int GameConsoleId,
     double Price) : IRequest<IResult<AddGameResponse>>;

@@ -5,51 +5,51 @@ using GameShop.Infrastructure.Data;
 
 namespace GameShop.Infrastructure.Repositories;
 
-public class GamesConsoleRepository(
+public class GameConsoleRepository(
     IDbContextFactory<ReadOnlyDatabaseContext> readOnlyDbContextFactory,
-    IDbContextFactory<WriteReadDatabaseContext> writeReadDbContextFactory) : IGamesConsoleRepository
+    IDbContextFactory<WriteReadDatabaseContext> writeReadDbContextFactory) : IGameConsoleRepository
 {
     private readonly IDbContextFactory<ReadOnlyDatabaseContext> _readOnlyDbContextFactory = readOnlyDbContextFactory;
     private readonly IDbContextFactory<WriteReadDatabaseContext> _writeReadDbContextFactory = writeReadDbContextFactory;
 
-    public async Task<IReadOnlyCollection<GamesConsole>> GetAllGamesConsoles(CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<GameConsole>> GetAllGameConsoles(CancellationToken cancellationToken)
     {
         var readOnlyDbContext = await _readOnlyDbContextFactory.CreateDbContextAsync(cancellationToken);
 
         return await readOnlyDbContext
-            .GamesConsoles
+            .GameConsoles
             .ToArrayAsync(cancellationToken);
     }
 
-    public async Task<GamesConsole?> GetGamesConsole(int gamesConsoleId, CancellationToken cancellationToken)
+    public async Task<GameConsole?> GetGameConsole(int gameConsoleId, CancellationToken cancellationToken)
     {
         var readOnlyDbContext = await _readOnlyDbContextFactory.CreateDbContextAsync(cancellationToken);
 
         return await readOnlyDbContext
-            .GamesConsoles
-            .FirstOrDefaultAsync(c => c.Id == gamesConsoleId, cancellationToken);
+            .GameConsoles
+            .FirstOrDefaultAsync(c => c.Id == gameConsoleId, cancellationToken);
     }
 
-    public async Task AddGamesConsole(GamesConsole gamesConsole, CancellationToken cancellationToken)
+    public async Task AddGameConsole(GameConsole gameConsole, CancellationToken cancellationToken)
     {
         var writeReadDbContext = await _writeReadDbContextFactory.CreateDbContextAsync(cancellationToken);
-        await writeReadDbContext.AddAsync(gamesConsole, cancellationToken);
+        await writeReadDbContext.AddAsync(gameConsole, cancellationToken);
         await writeReadDbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task UpdateGamesConsole(GamesConsole gamesConsole, CancellationToken cancellationToken)
+    public async Task UpdateGameConsole(GameConsole gameConsole, CancellationToken cancellationToken)
     {
         var writeReadDbContext = await _writeReadDbContextFactory.CreateDbContextAsync(cancellationToken);
 
-        writeReadDbContext.Update(gamesConsole);
+        writeReadDbContext.Update(gameConsole);
         await writeReadDbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task DeleteGamesConsole(GamesConsole gamesConsole, CancellationToken cancellationToken)
+    public async Task DeleteGameConsole(GameConsole gameConsole, CancellationToken cancellationToken)
     {
        var writeReadDbContext = await _writeReadDbContextFactory.CreateDbContextAsync(cancellationToken);
 
-        writeReadDbContext.Remove(gamesConsole);
+        writeReadDbContext.Remove(gameConsole);
         await writeReadDbContext.SaveChangesAsync(cancellationToken);
     }
 }

@@ -46,7 +46,7 @@ public class DeleteGameHandlerTests
     {
         // Arrange
         var game = fixture.Build<Game>()
-            .Without(g => g.GamesConsole)
+            .Without(g => g.GameConsole)
             .Create();
 
         gameRepositoryMock.Setup(repo => repo.GetGame(It.IsAny<int>(), It.IsAny<CancellationToken>()))

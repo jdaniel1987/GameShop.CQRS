@@ -13,22 +13,22 @@ public class AddGameIntegrationTests : ApiBaseTests
         IFixture fixture)
     {
         // Arrange
-        var existingGamesConsole = fixture.Build<GamesConsole>()
+        var existingGameConsole = fixture.Build<GameConsole>()
             .Without(gc => gc.Games)
             .Create();
 
         var addGameCommand = fixture.Build<AddGameCommand>()
-            .With(g => g.GamesConsoleId, existingGamesConsole.Id)
+            .With(g => g.GameConsoleId, existingGameConsole.Id)
             .Create();
 
-        await ReadOnlyDbContext.AddAsync(existingGamesConsole);
+        await ReadOnlyDbContext.AddAsync(existingGameConsole);
         await ReadOnlyDbContext.SaveChangesAsync();
 
         var expected = new Game()
         {
             Id = 1,
             Publisher = addGameCommand.Publisher,
-            GamesConsoleId = addGameCommand.GamesConsoleId,
+            GameConsoleId = addGameCommand.GameConsoleId,
             Name = addGameCommand.Name,
             Price = Price.Create(addGameCommand.Price),
         };
@@ -44,11 +44,11 @@ public class AddGameIntegrationTests : ApiBaseTests
         actualReadOnlyDb.Should().BeEquivalentTo(expected,
             opts => opts
             .Excluding(g => g.Id)
-            .Excluding(g => g.GamesConsole));
+            .Excluding(g => g.GameConsole));
         actualWriteReadDb.Should().BeEquivalentTo(expected,
             opts => opts
             .Excluding(g => g.Id)
-            .Excluding(g => g.GamesConsole));
+            .Excluding(g => g.GameConsole));
         MockEmailLogger.VerifyLog(mock => mock.LogInformation("Sent mail to {Email} ", "random@email.com"), Times.Once);
     }
 }

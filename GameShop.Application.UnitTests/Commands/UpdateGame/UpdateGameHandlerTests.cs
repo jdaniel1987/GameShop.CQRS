@@ -19,48 +19,48 @@ public class UpdateGameHandlerTests
     }
 
     [Theory, AutoData]
-    public async Task Handle_ShouldReturnFailureResult_WhenGamesConsoleIsNotFound(
-        [Frozen] Mock<IGamesConsoleRepository> gamesConsoleRepositoryMock,
+    public async Task Handle_ShouldReturnFailureResult_WhenGameConsoleIsNotFound(
+        [Frozen] Mock<IGameConsoleRepository> gameConsoleRepositoryMock,
         [Frozen] Mock<IGameRepository> gameRepositoryMock,
         UpdateGameCommand command)
     {
         // Arrange
-        var handler = new UpdateGameHandler(gameRepositoryMock.Object, gamesConsoleRepositoryMock.Object);
+        var handler = new UpdateGameHandler(gameRepositoryMock.Object, gameConsoleRepositoryMock.Object);
 
-        gamesConsoleRepositoryMock.Setup(repo => repo.GetGamesConsole(It.IsAny<int>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync((GamesConsole?)null);
+        gameConsoleRepositoryMock.Setup(repo => repo.GetGameConsole(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync((GameConsole?)null);
 
         // Act
         var result = await handler.Handle(command, CancellationToken.None);
 
         // Assert
         result.IsFailure.Should().BeTrue();
-        result.Error.Should().Be($"Games Console with ID: {command.GamesConsoleId} not found.");
+        result.Error.Should().Be($"Games Console with ID: {command.GameConsoleId} not found.");
     }
 
     [Theory, AutoData]
-    public async Task Handle_ShouldUpdateGame_WhenGamesConsoleIsFound(
-        [Frozen] Mock<IGamesConsoleRepository> gamesConsoleRepositoryMock,
+    public async Task Handle_ShouldUpdateGame_WhenGameConsoleIsFound(
+        [Frozen] Mock<IGameConsoleRepository> gameConsoleRepositoryMock,
         [Frozen] Mock<IGameRepository> gameRepositoryMock,
         UpdateGameCommand command,
         IFixture fixture)
     {
         // Arrange
         var game = fixture.Build<Game>()
-            .Without(g => g.GamesConsole)
+            .Without(g => g.GameConsole)
             .Create();
 
-        var gamesConsole = fixture.Build<GamesConsole>()
+        var gameConsole = fixture.Build<GameConsole>()
             .Without(gc => gc.Games)
             .Create();
 
-        gamesConsoleRepositoryMock.Setup(repo => repo.GetGamesConsole(It.IsAny<int>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(gamesConsole);
+        gameConsoleRepositoryMock.Setup(repo => repo.GetGameConsole(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(gameConsole);
 
         gameRepositoryMock.Setup(repo => repo.AddGame(It.IsAny<Game>(), It.IsAny<CancellationToken>()))
             .Returns(Task.CompletedTask);
 
-        var handler = new UpdateGameHandler(gameRepositoryMock.Object, gamesConsoleRepositoryMock.Object);
+        var handler = new UpdateGameHandler(gameRepositoryMock.Object, gameConsoleRepositoryMock.Object);
 
         // Act
         var result = await handler.Handle(command, CancellationToken.None);

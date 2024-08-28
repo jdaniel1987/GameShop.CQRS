@@ -14,18 +14,18 @@ public class GameRepositoryTests
         IFixture fixture,
         WriteReadDatabaseContext writeReadDbContext)
     {
-        var existingGamesConsoles = fixture.Build<GamesConsole>()
+        var existingGameConsoles = fixture.Build<GameConsole>()
             .Without(c => c.Games)
             .CreateMany()
             .ToArray();
-        var existingGames = existingGamesConsoles.SelectMany(c =>
+        var existingGames = existingGameConsoles.SelectMany(c =>
             fixture.Build<Game>()
-                .With(g => g.GamesConsoleId, c.Id)
-                .Without(g => g.GamesConsole)
+                .With(g => g.GameConsoleId, c.Id)
+                .Without(g => g.GameConsole)
                 .CreateMany())
             .ToArray();
 
-        await writeReadDbContext.AddRangeAsync(existingGamesConsoles);
+        await writeReadDbContext.AddRangeAsync(existingGameConsoles);
         await writeReadDbContext.AddRangeAsync(existingGames);
         await writeReadDbContext.SaveChangesAsync();
 
@@ -48,7 +48,7 @@ public class GameRepositoryTests
 
             // Assert
             actual.Should().BeEquivalentTo(expected, opts => opts
-                .Excluding(e => e.GamesConsole!.Games));
+                .Excluding(e => e.GameConsole!.Games));
         }
     }
 
@@ -60,15 +60,15 @@ public class GameRepositoryTests
             // Arrange
             var existingGames = await CreateExistingGames(Fixture, WriteReadDbContext);
 
-            var gamesConsoleToFind = existingGames.First();
-            var expected = existingGames.Where(g => g.GamesConsoleId == gamesConsoleToFind.GamesConsoleId);
+            var gameConsoleToFind = existingGames.First();
+            var expected = existingGames.Where(g => g.GameConsoleId == gameConsoleToFind.GameConsoleId);
 
             // Act
-            var actual = await RepositoryUnderTesting.GetGamesForConsole(gamesConsoleToFind.GamesConsoleId, default);
+            var actual = await RepositoryUnderTesting.GetGamesForConsole(gameConsoleToFind.GameConsoleId, default);
 
             //Assert
             actual.Should().BeEquivalentTo(expected, opts => opts
-                .Excluding(e => e.GamesConsole!.Games));
+                .Excluding(e => e.GameConsole!.Games));
         }
     }
 
@@ -81,14 +81,14 @@ public class GameRepositoryTests
             var existingGames = await CreateExistingGames(Fixture, WriteReadDbContext);
             var nameToFind = Fixture.Create<string>();
             var game1ToFind = Fixture.Build<Game>()
-                .With(g => g.GamesConsoleId, existingGames.First().GamesConsoleId)
+                .With(g => g.GameConsoleId, existingGames.First().GameConsoleId)
                 .With(g => g.Name, $"{Fixture.Create<string>()}{nameToFind}{Fixture.Create<string>()}")
-                .Without(g => g.GamesConsole)
+                .Without(g => g.GameConsole)
                 .Create();
             var game2ToFind = Fixture.Build<Game>()
-                .With(g => g.GamesConsoleId, existingGames.First().GamesConsoleId)
+                .With(g => g.GameConsoleId, existingGames.First().GameConsoleId)
                 .With(g => g.Name, $"{Fixture.Create<string>()}{nameToFind}{Fixture.Create<string>()}")
-                .Without(g => g.GamesConsole)
+                .Without(g => g.GameConsole)
                 .Create();
             await WriteReadDbContext.Games.AddAsync(game1ToFind);
             await WriteReadDbContext.Games.AddAsync(game2ToFind);
@@ -101,7 +101,7 @@ public class GameRepositoryTests
 
             // Assert
             actual.Should().BeEquivalentTo(expected, opts => opts
-                .Excluding(e => e.GamesConsole));
+                .Excluding(e => e.GameConsole));
         }
     }
 
@@ -111,14 +111,14 @@ public class GameRepositoryTests
         public async Task Should_add_game_to_console()
         {
             // Arrange
-            var existingGamesConsole = Fixture.Build<GamesConsole>()
+            var existingGameConsole = Fixture.Build<GameConsole>()
                 .Without(c => c.Games)
                 .Create();
             var newGame = Fixture.Build<Game>()
-                .With(g => g.GamesConsoleId, existingGamesConsole.Id)
-                .Without(g => g.GamesConsole)
+                .With(g => g.GameConsoleId, existingGameConsole.Id)
+                .Without(g => g.GameConsole)
                 .Create();
-            await WriteReadDbContext.GamesConsoles.AddAsync(existingGamesConsole);
+            await WriteReadDbContext.GameConsoles.AddAsync(existingGameConsole);
             await WriteReadDbContext.SaveChangesAsync();
 
             var expected = newGame;
@@ -129,8 +129,8 @@ public class GameRepositoryTests
             // Assert
             var actualReadOnlyDbContext = await ReadOnlyDbContext.Games.SingleAsync();
             var actualWriteReadDbContext = await WriteReadDbContext.Games.SingleAsync();
-            actualReadOnlyDbContext.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.GamesConsole));
-            actualWriteReadDbContext.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.GamesConsole));
+            actualReadOnlyDbContext.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.GameConsole));
+            actualWriteReadDbContext.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.GameConsole));
         }
     }
 
@@ -145,7 +145,7 @@ public class GameRepositoryTests
             var existingGameToUpdate = existingGames.First();
             var updatedGame = Fixture.Build<Game>()
                 .With(g => g.Id, existingGameToUpdate.Id)
-                .Without(g => g.GamesConsole)
+                .Without(g => g.GameConsole)
                 .Create();
 
             var expected = updatedGame;
@@ -156,8 +156,8 @@ public class GameRepositoryTests
             // Assert
             var actualReadOnly = await ReadOnlyDbContext.Games.FirstAsync();
             var actualWriteRead = await ReadOnlyDbContext.Games.FirstAsync();
-            actualReadOnly.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.GamesConsole));
-            actualWriteRead.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.GamesConsole));
+            actualReadOnly.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.GameConsole));
+            actualWriteRead.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.GameConsole));
         }
     }
 

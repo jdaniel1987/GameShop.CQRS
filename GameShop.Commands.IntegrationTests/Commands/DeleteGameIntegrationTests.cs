@@ -11,17 +11,17 @@ public class DeleteGameIntegrationTests : ApiBaseTests
         int gameIdToDelete)
     {
         // Arrange
-        var existingGamesConsole = fixture.Build<GamesConsole>()
+        var existingGameConsole = fixture.Build<GameConsole>()
             .Without(gc => gc.Games)
             .Create();
 
         var existingGame = fixture.Build<Game>()
             .With(c => c.Id, gameIdToDelete)
-            .With(c => c.GamesConsoleId, existingGamesConsole.Id)
-            .Without(c => c.GamesConsole)
+            .With(c => c.GameConsoleId, existingGameConsole.Id)
+            .Without(c => c.GameConsole)
             .Create();
 
-        await WriteReadDbContext.AddAsync(existingGamesConsole);
+        await WriteReadDbContext.AddAsync(existingGameConsole);
         await WriteReadDbContext.AddAsync(existingGame);
         await WriteReadDbContext.SaveChangesAsync();
 

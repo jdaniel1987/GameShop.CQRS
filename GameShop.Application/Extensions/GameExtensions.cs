@@ -19,7 +19,7 @@ public static class GameExtensions
             Name = command.Name,
             Publisher = command.Publisher,
             Price = Price.Create(command.Price),
-            GamesConsoleId = command.GamesConsoleId
+            GameConsoleId = command.GameConsoleId
         };
 
     public static Game ToDomain(this UpdateGameCommand command) =>
@@ -29,7 +29,7 @@ public static class GameExtensions
             Name = command.Name,
             Publisher = command.Publisher,
             Price = Price.Create(command.Price),
-            GamesConsoleId = command.GamesConsoleId
+            GameConsoleId = command.GameConsoleId
         };
 
     public static GameCreatedEvent ToEvent(this Game game) =>
@@ -47,8 +47,8 @@ public static class GameExtensions
                 g.Name,
                 g.Publisher,
                 g.Price.Value,
-                g.GamesConsoleId,
-                g.GamesConsole!.Name))
+                g.GameConsoleId,
+                g.GameConsole!.Name))
             .ToImmutableArray());
 
     public static GetGamesByNameResponse ToGetGamesByNameResponse(this IReadOnlyCollection<Game> games) =>
@@ -58,8 +58,8 @@ public static class GameExtensions
                 g.Name,
                 g.Publisher,
                 g.Price.Value,
-                g.GamesConsoleId,
-                g.GamesConsole!.Name))
+                g.GameConsoleId,
+                g.GameConsole!.Name))
             .ToImmutableArray());
 
     public static GetGamesForConsoleResponse ToGetGamesForConsoleResponse(this IReadOnlyCollection<Game> games) =>
@@ -69,8 +69,8 @@ public static class GameExtensions
                 g.Name,
                 g.Publisher,
                 g.Price.Value,
-                g.GamesConsoleId,
-                g.GamesConsole!.Name))
+                g.GameConsoleId,
+                g.GameConsole!.Name))
             .ToImmutableArray());
 
     public static AddGameResponse ToAddGameResponse(this Game game) =>

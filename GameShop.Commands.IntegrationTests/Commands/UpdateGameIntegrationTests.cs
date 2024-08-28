@@ -12,32 +12,32 @@ public class UpdateGameIntegrationTests : ApiBaseTests
         IFixture fixture)
     {
         // Arrange
-        var existingGamesConsoles = fixture
-            .Build<GamesConsole>()
+        var existingGameConsoles = fixture
+            .Build<GameConsole>()
             .Without(c => c.Games)
             .CreateMany(2);
 
         var existingGame = fixture
             .Build<Game>()
-            .With(g => g.GamesConsoleId, existingGamesConsoles.First().Id)
-            .Without(c => c.GamesConsole)
+            .With(g => g.GameConsoleId, existingGameConsoles.First().Id)
+            .Without(c => c.GameConsole)
             .Create();
 
-        await WriteReadDbContext.AddRangeAsync(existingGamesConsoles);
+        await WriteReadDbContext.AddRangeAsync(existingGameConsoles);
         await WriteReadDbContext.AddAsync(existingGame);
         await WriteReadDbContext.SaveChangesAsync();
 
         var updateGameCommand = fixture
             .Build<UpdateGameCommand>()
             .With(c => c.Id, existingGame.Id)
-            .With(c => c.GamesConsoleId, existingGamesConsoles.Last().Id)
+            .With(c => c.GameConsoleId, existingGameConsoles.Last().Id)
             .Create();
 
         var expected = new Game()
         {
             Id = updateGameCommand.Id,
             Name = updateGameCommand.Name,
-            GamesConsoleId = updateGameCommand.GamesConsoleId,
+            GameConsoleId = updateGameCommand.GameConsoleId,
             Price = Price.Create(updateGameCommand.Price),
             Publisher = updateGameCommand.Publisher,
         };

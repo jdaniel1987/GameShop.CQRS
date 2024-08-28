@@ -6,7 +6,7 @@ public class GetGamesForConsoleQueryValidator : AbstractValidator<GetGamesForCon
 {
     public GetGamesForConsoleQueryValidator()
     {
-        RuleFor(x => x.GamesConsoleId)
-            .GreaterThan(0).WithMessage("GamesConsoleId must be a positive integer.");
+        RuleFor(x => x.GameConsoleId)
+            .GreaterThan(0).WithMessage("GameConsoleId must be a positive integer.");
     }
 }

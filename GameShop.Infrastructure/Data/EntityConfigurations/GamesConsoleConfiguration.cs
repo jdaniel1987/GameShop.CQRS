@@ -5,9 +5,9 @@ using GameShop.Domain.ValueObjects;
 
 namespace GameShop.Infrastructure.Data.EntityConfigurations;
 
-public class GamesConsoleConfiguration : IEntityTypeConfiguration<GamesConsole>
+public class GameConsoleConfiguration : IEntityTypeConfiguration<GameConsole>
 {
-    public void Configure(EntityTypeBuilder<GamesConsole> builder)
+    public void Configure(EntityTypeBuilder<GameConsole> builder)
     {
         builder.HasKey(e => e.Id);
 

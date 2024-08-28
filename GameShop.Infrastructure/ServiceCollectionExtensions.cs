@@ -24,7 +24,7 @@ public static class ServiceCollectionExtensions
             .UseSqlServer(writeReadConnectionString));
 
         services.AddTransient<IGameRepository, GameRepository>();
-        services.AddTransient<IGamesConsoleRepository, GamesConsoleRepository>();
+        services.AddTransient<IGameConsoleRepository, GameConsoleRepository>();
 
         services.AddTransient<IEmailSender, FakeEmailSender>();
 

@@ -7,21 +7,21 @@ namespace GameShop.Application.Queries.GetGamesForConsole;
 
 public class GetGamesForConsoleHandler(
     IGameRepository gameRepository,
-    IGamesConsoleRepository consoleRepository) : IRequestHandler<GetGamesForConsoleQuery, IResult<GetGamesForConsoleResponse>>
+    IGameConsoleRepository consoleRepository) : IRequestHandler<GetGamesForConsoleQuery, IResult<GetGamesForConsoleResponse>>
 {
     private readonly IGameRepository _gameRepository = gameRepository;
-    private readonly IGamesConsoleRepository _gamesConsoleRepository = consoleRepository;
+    private readonly IGameConsoleRepository _gameConsoleRepository = consoleRepository;
 
     public async Task<IResult<GetGamesForConsoleResponse>> Handle(GetGamesForConsoleQuery request, CancellationToken cancellationToken)
     {
-        var console = await _gamesConsoleRepository.GetGamesConsole(request.GamesConsoleId, cancellationToken);
+        var console = await _gameConsoleRepository.GetGameConsole(request.GameConsoleId, cancellationToken);
 
         if (console is null)
         {
-            return Result.Failure<GetGamesForConsoleResponse>($"Console with ID {request.GamesConsoleId} does not exist");
+            return Result.Failure<GetGamesForConsoleResponse>($"Console with ID {request.GameConsoleId} does not exist");
         }
 
-        var games = await _gameRepository.GetGamesForConsole(request.GamesConsoleId, cancellationToken);
+        var games = await _gameRepository.GetGamesForConsole(request.GameConsoleId, cancellationToken);
 
         return Result.Success(games.ToGetGamesForConsoleResponse());
     }

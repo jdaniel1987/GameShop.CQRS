@@ -3,12 +3,12 @@
     [Name]           VARCHAR (MAX)   NOT NULL,
     [Publisher]      VARCHAR (MAX)   NOT NULL,
     [Price]          DECIMAL (18, 2) NOT NULL,
-    [GamesConsoleId] INT             NOT NULL,
+    [GameConsoleId] INT             NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Games_ToGamesConsole] FOREIGN KEY ([GamesConsoleId]) REFERENCES [dbo].[GamesConsoles] ([Id])
+    CONSTRAINT [FK_Games_ToGameConsole] FOREIGN KEY ([GameConsoleId]) REFERENCES [dbo].[GameConsoles] ([Id])
 );
 
-INSERT INTO [dbo].[Games] ([Name], [Publisher], [Price], [GamesConsoleId])
+INSERT INTO [dbo].[Games] ([Name], [Publisher], [Price], [GameConsoleId])
 VALUES
 ('Spider-Man: Miles Morales', 'Sony Interactive Entertainment', 49.99, 1),
 ('Halo Infinite', 'Xbox Game Studios', 59.99, 2),

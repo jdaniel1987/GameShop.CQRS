@@ -18,22 +18,22 @@ public class GameRepository(
         
         return await readOnlyDbContext
             .Games
-            .Include(g => g.GamesConsole)
+            .Include(g => g.GameConsole)
             .ToArrayAsync(cancellationToken);
     }
 
-    public async Task<IReadOnlyCollection<Game>> GetGamesForConsole(int gamesConsoleId, CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<Game>> GetGamesForConsole(int gameConsoleId, CancellationToken cancellationToken)
     {
         var readOnlyDbContext = await _readOnlyDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
         var gameConsole = await readOnlyDbContext
-            .GamesConsoles
-            .FirstOrDefaultAsync(c => c.Id == gamesConsoleId, cancellationToken)
+            .GameConsoles
+            .FirstOrDefaultAsync(c => c.Id == gameConsoleId, cancellationToken)
             ?? throw new Exception("Games console does not exist.");
 
         return await readOnlyDbContext
             .Games
-            .Include(g => g.GamesConsole)
-            .Where(x => x.GamesConsoleId == gamesConsoleId)
+            .Include(g => g.GameConsole)
+            .Where(x => x.GameConsoleId == gameConsoleId)
             .ToArrayAsync(cancellationToken);
     }
 
@@ -43,7 +43,7 @@ public class GameRepository(
 
         return await readOnlyDbContext
             .Games
-            .Include(g => g.GamesConsole)
+            .Include(g => g.GameConsole)
             .FirstOrDefaultAsync(x => x.Id == gameId, cancellationToken);
     }
 
@@ -53,7 +53,7 @@ public class GameRepository(
         
         return await readOnlyDbContext
             .Games
-            .Include(g => g.GamesConsole)
+            .Include(g => g.GameConsole)
             .Where(g => EF.Functions.Like(g.Name, $"%{gameName}%"))
             .ToArrayAsync(cancellationToken);
     }

@@ -31,7 +31,7 @@ public class GetGamesByNameHandlerTests
         var handler = new GetGamesByNameHandler(gameRepositoryMock.Object);
 
         var games = fixture.Build<Game>()
-            .With(g => g.GamesConsole, fixture.Build<GamesConsole>()
+            .With(g => g.GameConsole, fixture.Build<GameConsole>()
                 .Without(gc => gc.Games)
                 .Create())
             .CreateMany()
@@ -47,8 +47,8 @@ public class GetGamesByNameHandlerTests
                 g.Name,
                 g.Publisher,
                 g.Price.Value,
-                g.GamesConsoleId,
-                g.GamesConsole!.Name))
+                g.GameConsoleId,
+                g.GameConsole!.Name))
             .ToImmutableArray());
 
         // Act
