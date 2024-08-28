@@ -1,0 +1,61 @@
+@GameShopAPICommands_HostAddress = http://localhost:5190
+
+POST {{GameShopAPICommands_HostAddress}}/api/AddGame/
+Accept: application/json
+Content-Type: application/json
+{
+  "name": "God of War: Ragnarok",
+  "publisher": "Sony Interactive Entertainment",
+  "gamesConsoleId": 4,
+  "price": 69.99
+}
+
+###
+
+PUT {{GameShopAPICommands_HostAddress}}/api/UpdateGame/
+Accept: application/json
+Content-Type: application/json
+{
+  "id": 1,
+  "name": "God of War: Ragnarok",
+  "publisher": "Sony Interactive Entertainment",
+  "gamesConsoleId": 1,
+  "price": 69.99
+}
+
+###
+
+DELETE {{GameShopAPICommands_HostAddress}}/api/DeleteGame/1
+Accept: application/json
+
+###
+POST {{GameShopAPICommands_HostAddress}}/api/AddGamesConsole/
+Accept: application/json
+Content-Type: application/json
+{
+  "name": "Play Station 5 Pro",
+  "manufacturer": "Sony",
+  "price": 699.99
+}
+
+###
+
+PUT {{GameShopAPICommands_HostAddress}}/api/UpdateGamesConsole/
+Accept: application/json
+Content-Type: application/json
+{
+  "id": 1,
+  "name": "Play Station 5 Slim",
+  "manufacturer": "Sony",
+  "price": 599.99
+}
+
+###
+
+DELETE {{GameShopAPICommands_HostAddress}}/api/DeleteGamesConsole/1
+Accept: application/json
+
+###
+
+
+
