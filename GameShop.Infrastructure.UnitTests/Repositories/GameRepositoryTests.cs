@@ -155,7 +155,7 @@ public class GameRepositoryTests
 
             // Assert
             var actualReadOnly = await ReadOnlyDbContext.Games.FirstAsync();
-            var actualWriteRead = await ReadOnlyDbContext.Games.FirstAsync();
+            var actualWriteRead = await WriteReadDbContext.Games.FirstAsync();
             actualReadOnly.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.GameConsole));
             actualWriteRead.Should().BeEquivalentTo(expected, opts => opts.Excluding(e => e.GameConsole));
         }
@@ -172,7 +172,7 @@ public class GameRepositoryTests
             await RepositoryUnderTesting.DeleteGame(gameToDelete, default);
 
             var actualReadOnly = await ReadOnlyDbContext.Games.Where(g => g.Id == gameToDelete.Id).ToArrayAsync();
-            var actualWriteRead = await ReadOnlyDbContext.Games.Where(g => g.Id == gameToDelete.Id).ToArrayAsync();
+            var actualWriteRead = await WriteReadDbContext.Games.Where(g => g.Id == gameToDelete.Id).ToArrayAsync();
             actualReadOnly.Should().BeEmpty();
             actualWriteRead.Should().BeEmpty();
         }
