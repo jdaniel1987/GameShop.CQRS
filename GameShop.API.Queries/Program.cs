@@ -1,5 +1,5 @@
 using Carter;
-using GameShop.API.Queries.DatabaseSeed;
+using GameShop.Infrastructure.Data.DatabaseSeed.DatabaseSeed;
 using GameShop.Queries.API;
 
 namespace GameShop.API.Queries;

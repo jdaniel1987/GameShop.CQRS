@@ -1,8 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace GameShop.API.Queries.DatabaseSeed;
+namespace GameShop.Infrastructure.Data.DatabaseSeed.DatabaseSeed;
 
 public static class DatabaseCreation
 {
@@ -10,7 +11,7 @@ public static class DatabaseCreation
     {
         var databaseName = "GameShopExample";
         var connectionString = configuration.GetConnectionString("DbCreation");
-        var scriptsDir = "./DatabaseSeed/Scripts";
+        var scriptsDir = "../GameShop.Infrastructure/Data/DatabaseSeed/Scripts";
 
         var serverConnection = new ServerConnection(new SqlConnection(connectionString));
         var server = new Server(serverConnection);
