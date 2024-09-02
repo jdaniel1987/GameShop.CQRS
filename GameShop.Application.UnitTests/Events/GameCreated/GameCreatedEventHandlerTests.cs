@@ -1,11 +1,9 @@
-﻿using AutoFixture.Xunit2;
-using GameShop.Application.Events.GameCreated;
-using Moq;
+﻿using GameShop.Application.Events.GameCreated;
 using GameShop.Domain.Services;
 
 namespace GameShop.Application.UnitTests.Events.GameCreated;
 
-public class GameCreatedEventHandlerTests
+public sealed class GameCreatedEventHandlerTests
 {
     [Theory, AutoData]
     public async Task Handle_ShouldSendEmailNotification_WhenGameCreated(
@@ -13,7 +11,7 @@ public class GameCreatedEventHandlerTests
         GameCreatedEvent notification)
     {
         // Arrange
-        var handler = new GameCreatedEventHandler(emailSenderMock.Object);
+        var handler = new GameCreatedHandler(emailSenderMock.Object);
 
         // Act
         await handler.Handle(notification, CancellationToken.None);

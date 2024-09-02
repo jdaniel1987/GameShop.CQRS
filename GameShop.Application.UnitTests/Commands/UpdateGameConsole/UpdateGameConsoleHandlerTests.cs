@@ -1,14 +1,10 @@
-﻿using AutoFixture;
-using AutoFixture.Xunit2;
-using FluentAssertions;
-using GameShop.Application.Commands.UpdateGameConsole;
+﻿using GameShop.Application.Commands.UpdateGameConsole;
 using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;
-using Moq;
 
 namespace GameShop.Application.UnitTests.Commands.UpdateGameConsole;
 
-public class UpdateGameConsoleHandlerTests
+public sealed class UpdateGameConsoleHandlerTests
 {
     [Theory, AutoData]
     public async Task Handle_ShouldUpdateGameConsole_WhenGameConsoleIsFound(

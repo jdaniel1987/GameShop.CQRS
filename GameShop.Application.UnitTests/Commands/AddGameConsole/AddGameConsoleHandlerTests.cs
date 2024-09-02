@@ -1,13 +1,10 @@
-﻿using AutoFixture.Xunit2;
-using FluentAssertions;
-using GameShop.Application.Commands.AddGameConsole;
+﻿using GameShop.Application.Commands.AddGameConsole;
 using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;
-using Moq;
 
 namespace GameShop.Application.UnitTests.Commands.AddGameConsole;
 
-public class AddGameConsoleHandlerTests
+public sealed class AddGameConsoleHandlerTests
 {
     [Theory, AutoData]
     public async Task Handle_ShouldAddGameConsoleSuccessfully(

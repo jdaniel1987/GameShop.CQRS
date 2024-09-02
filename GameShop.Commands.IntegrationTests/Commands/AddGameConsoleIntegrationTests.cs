@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GameShop.Commands.IntegrationTests.Commands;
 
-public class AddGameConsoleIntegrationTests : ApiBaseTests
+public sealed class AddGameConsoleIntegrationTests : ApiBaseTests
 {
     [Theory, AutoData]
     public async Task Should_add_games_console(

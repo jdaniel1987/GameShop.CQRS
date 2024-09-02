@@ -1,16 +1,12 @@
-﻿using AutoFixture;
-using AutoFixture.Xunit2;
-using FluentAssertions;
-using GameShop.Application.Commands.AddGame;
+﻿using GameShop.Application.Commands.AddGame;
 using GameShop.Application.Events.GameCreated;
 using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;
 using MediatR;
-using Moq;
 
 namespace GameShop.Application.UnitTests.Commands.AddGame;
 
-public class AddGameHandlerTests
+public sealed class AddGameHandlerTests
 {
     [Theory, AutoData]
     public async Task Handle_ShouldReturnFailureResult_WhenGameConsoleIsNotFound(

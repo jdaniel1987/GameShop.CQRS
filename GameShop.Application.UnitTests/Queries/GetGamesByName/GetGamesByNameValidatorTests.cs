@@ -3,7 +3,7 @@ using FluentValidation.TestHelper;
 
 namespace GameShop.Application.UnitTests.Queries.GetGamesByName;
 
-public class GetGamesByNameQueryValidatorTests
+public sealed class GetGamesByNameQueryValidatorTests
 {
     private readonly GetGamesByNameQueryValidator _validator;
 

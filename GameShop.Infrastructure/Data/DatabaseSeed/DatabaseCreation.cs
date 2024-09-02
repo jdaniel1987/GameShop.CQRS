@@ -13,7 +13,8 @@ public static class DatabaseCreation
         var connectionString = configuration.GetConnectionString("DbCreation");
         var scriptsDir = "../GameShop.Infrastructure/Data/DatabaseSeed/Scripts";
 
-        var serverConnection = new ServerConnection(new SqlConnection(connectionString));
+        using var sqlConnection = new SqlConnection(connectionString);
+        var serverConnection = new ServerConnection(sqlConnection);
         var server = new Server(serverConnection);
 
         if (server.Databases.Contains(databaseName))
@@ -30,7 +31,7 @@ public static class DatabaseCreation
             var script = File.ReadAllText(scriptFile);
             using var connection = new SqlConnection(connectionString);
             connection.Open();
-            var command = new SqlCommand(script, connection);
+            using var command = new SqlCommand(script, connection);
             command.ExecuteNonQuery();
         }
     }

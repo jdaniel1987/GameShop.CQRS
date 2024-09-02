@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GameShop.Infrastructure.UnitTests.Repositories;
 
-public class GameRepositoryTests
+public sealed class GameRepositoryTests
 {
     public static async Task<IReadOnlyCollection<Game>>
         CreateExistingGames(

@@ -3,7 +3,7 @@ using GameShop.Application.Commands.AddGameConsole;
 
 namespace GameShop.Application.UnitTests.Commands.AddGameConsole;
 
-public class AddGameConsoleCommandValidatorTests
+public sealed class AddGameConsoleCommandValidatorTests
 {
     private readonly AddGameConsoleCommandValidator _validator;
 

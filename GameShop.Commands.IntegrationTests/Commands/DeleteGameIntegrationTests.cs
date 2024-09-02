@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GameShop.Commands.IntegrationTests.Commands;
 
-public class DeleteGameIntegrationTests : ApiBaseTests
+public sealed class DeleteGameIntegrationTests : ApiBaseTests
 {
     [Theory, AutoData]
     public async Task Should_delete_game(

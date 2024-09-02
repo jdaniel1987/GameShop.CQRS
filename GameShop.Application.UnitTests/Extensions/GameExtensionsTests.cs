@@ -1,7 +1,4 @@
-﻿using AutoFixture;
-using AutoFixture.Xunit2;
-using FluentAssertions;
-using GameShop.Application.Commands.AddGame;
+﻿using GameShop.Application.Commands.AddGame;
 using GameShop.Application.Commands.DeleteGame;
 using GameShop.Application.Commands.UpdateGame;
 using GameShop.Application.Extensions;
@@ -11,9 +8,9 @@ using System.Collections.Immutable;
 
 namespace GameShop.Application.UnitTests.Extensions;
 
-public class GameExtensionsTests
+public sealed class GameExtensionsTests
 {
-    public class AddGameCommandToDomain
+    public sealed class AddGameCommandToDomain
     {
         [Theory, AutoData]
         public void ToDomain_ShouldConvertAddGameCommandToGame(AddGameCommand command)
@@ -31,7 +28,7 @@ public class GameExtensionsTests
         }
     }
 
-    public class UpdateGameCommandToDomain
+    public sealed class UpdateGameCommandToDomain
     {
         [Theory, AutoData]
         public void ToDomain_ShouldConvertUpdateGameCommandToGame(UpdateGameCommand command)
@@ -50,7 +47,7 @@ public class GameExtensionsTests
         }
     }
 
-    public class GameToEvent
+    public sealed class GameToEvent
     {
         [Theory, AutoData]
         public void ToEvent_ShouldConvertGameToGameCreatedEvent(
@@ -75,7 +72,7 @@ public class GameExtensionsTests
         }
     }
 
-    public class GamesToResponses
+    public sealed class GamesToResponses
     {
         [Theory, AutoData]
         public void ToGetAllGamesResponse_ShouldConvertGamesToGetAllGamesResponse(
@@ -138,7 +135,7 @@ public class GameExtensionsTests
         }
     }
 
-    public class GameToResponse
+    public sealed class GameToResponse
     {
         [Theory, AutoData]
         public void ToAddGameResponse_ShouldConvertGameToAddGameResponse(

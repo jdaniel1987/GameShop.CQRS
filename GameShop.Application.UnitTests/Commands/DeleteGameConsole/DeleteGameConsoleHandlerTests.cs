@@ -1,14 +1,10 @@
-﻿using AutoFixture;
-using AutoFixture.Xunit2;
-using FluentAssertions;
-using GameShop.Application.Commands.DeleteGameConsole;
+﻿using GameShop.Application.Commands.DeleteGameConsole;
 using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;
-using Moq;
 
 namespace GameShop.Application.UnitTests.Commands.DeleteGameConsole;
 
-public class DeleteGameConsoleHandlerTests
+public sealed class DeleteGameConsoleHandlerTests
 {
     [Theory, AutoData]
     public async Task Handle_ShouldReturnFailureResult_WhenGameConsoleIsNotFound(

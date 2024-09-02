@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 
 namespace GameShop.Queries.IntegrationTests.Queries;
 
-public class GetGamesForConsoleIntegrationTests : ApiBaseTests
+public sealed class GetGamesForConsoleIntegrationTests : ApiBaseTests
 {
     [Theory, AutoData]
     public async Task Should_get_games_for_Console(

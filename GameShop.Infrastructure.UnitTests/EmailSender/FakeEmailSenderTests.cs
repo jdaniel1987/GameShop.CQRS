@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GameShop.Infrastructure.UnitTests.EmailSender;
 
-public class FakeEmailSenderTests
+public sealed class FakeEmailSenderTests
 {
     public sealed class SendNotification
     {

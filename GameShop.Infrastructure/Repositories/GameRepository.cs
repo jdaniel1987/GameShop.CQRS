@@ -27,8 +27,7 @@ public class GameRepository(
         var readOnlyDbContext = await _readOnlyDatabaseContextFactory.CreateDbContextAsync(cancellationToken);
         var gameConsole = await readOnlyDbContext
             .GameConsoles
-            .FirstOrDefaultAsync(c => c.Id == gameConsoleId, cancellationToken)
-            ?? throw new Exception("Games console does not exist.");
+            .FirstOrDefaultAsync(c => c.Id == gameConsoleId, cancellationToken);
 
         return await readOnlyDbContext
             .Games

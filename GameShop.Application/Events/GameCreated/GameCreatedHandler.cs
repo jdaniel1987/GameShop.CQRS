@@ -3,7 +3,7 @@ using MediatR;
 
 namespace GameShop.Application.Events.GameCreated;
 
-public class GameCreatedEventHandler(
+public class GameCreatedHandler(
     IEmailSender emailSender) : INotificationHandler<GameCreatedEvent>
 {
     private readonly IEmailSender _emailSender = emailSender;

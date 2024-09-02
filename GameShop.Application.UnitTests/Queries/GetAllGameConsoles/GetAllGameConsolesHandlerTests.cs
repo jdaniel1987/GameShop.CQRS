@@ -1,15 +1,11 @@
-﻿using AutoFixture.Xunit2;
-using AutoFixture;
-using GameShop.Domain.Entities;
+﻿using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;
-using Moq;
 using System.Collections.Immutable;
-using FluentAssertions;
 using GameShop.Application.Queries.GetAllGameConsoles;
 
 namespace GameShop.Application.UnitTests.Queries;
 
-public class GetAllGameConsolesHandlerTests
+public sealed class GetAllGameConsolesHandlerTests
 {
     [Theory, AutoData]
     public async Task Handle_ShouldReturnSuccessResult_WhenGameConsolesAreRetrieved(

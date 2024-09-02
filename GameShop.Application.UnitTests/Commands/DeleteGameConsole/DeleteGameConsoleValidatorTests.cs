@@ -3,7 +3,7 @@ using GameShop.Application.Commands.DeleteGameConsole;
 
 namespace GameShop.Application.UnitTests.Commands.DeleteGameConsole;
 
-public class DeleteGameConsoleCommandValidatorTests
+public sealed class DeleteGameConsoleCommandValidatorTests
 {
     private readonly DeleteGameConsoleCommandValidator _validator;
 

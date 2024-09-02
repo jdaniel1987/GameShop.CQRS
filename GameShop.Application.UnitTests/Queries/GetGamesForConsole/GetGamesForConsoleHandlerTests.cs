@@ -1,15 +1,11 @@
-﻿using AutoFixture.Xunit2;
-using AutoFixture;
-using GameShop.Domain.Entities;
+﻿using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;
-using Moq;
-using FluentAssertions;
 using System.Collections.Immutable;
 using GameShop.Application.Queries.GetGamesForConsole;
 
 namespace GameShop.Application.UnitTests.Queries.GetGamesForConsole;
 
-public class GetGamesForConsoleHandlerTests
+public sealed class GetGamesForConsoleHandlerTests
 {
     [Theory, AutoData]
     public async Task Handle_ShouldReturnFailureResult_WhenGameConsoleIsNotFound(

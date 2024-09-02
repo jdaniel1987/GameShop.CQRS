@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GameShop.Commands.IntegrationTests.Commands;
 
-public class AddGameIntegrationTests : ApiBaseTests
+public sealed class AddGameIntegrationTests : ApiBaseTests
 {
     [Theory, AutoData]
     public async Task Should_add_game(

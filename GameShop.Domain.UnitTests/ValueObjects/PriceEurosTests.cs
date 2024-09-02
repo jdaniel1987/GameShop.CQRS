@@ -1,10 +1,8 @@
-﻿using AutoFixture.Xunit2;
-using FluentAssertions;
-using GameShop.Domain.ValueObjects;
+﻿using GameShop.Domain.ValueObjects;
 
 namespace GameShop.Domain.UnitTests.ValueObjects;
 
-public class PriceEurosTests
+public sealed class PriceEurosTests
 {
     [Theory, AutoData]
     public void Create_ShouldInitializePriceEurosCorrectly(

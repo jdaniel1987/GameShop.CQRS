@@ -3,7 +3,7 @@ using GameShop.Application.Commands.DeleteGame;
 
 namespace GameShop.Application.UnitTests.Commands.DeleteGame;
 
-public class DeleteGameCommandValidatorTests
+public sealed class DeleteGameCommandValidatorTests
 {
     private readonly DeleteGameCommandValidator _validator;
 
