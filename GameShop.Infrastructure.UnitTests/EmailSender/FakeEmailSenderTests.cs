@@ -1,7 +1,5 @@
-﻿using AutoFixture.Xunit2;
-using GameShop.Infrastructure.EmailSender;
+﻿using GameShop.Infrastructure.EmailSender;
 using Microsoft.Extensions.Logging;
-using Moq;
 
 namespace GameShop.Infrastructure.UnitTests.EmailSender;
 

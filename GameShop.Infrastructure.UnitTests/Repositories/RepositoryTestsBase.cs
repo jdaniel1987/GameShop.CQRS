@@ -1,7 +1,5 @@
-﻿using AutoFixture;
-using GameShop.Infrastructure.Data;
+﻿using GameShop.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 
 namespace GameShop.Infrastructure.UnitTests.Repositories;
 
@@ -43,5 +41,6 @@ public class RepositoryTestsBase<T> : IDisposable
     {
         ReadOnlyDbContext.Dispose();
         WriteReadDbContext.Dispose();
+        GC.SuppressFinalize(this);
     }
 }

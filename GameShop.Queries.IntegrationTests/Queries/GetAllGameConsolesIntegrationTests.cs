@@ -1,5 +1,3 @@
-using AutoFixture;
-using AutoFixture.Xunit2;
 using GameShop.Application.Queries.GetAllGameConsoles;
 using GameShop.Domain.Entities;
 using System.Collections.Immutable;

@@ -1,5 +1,4 @@
-﻿using AutoFixture.AutoMoq;
-using AutoFixture.Xunit2;
+﻿using AutoFixture.Xunit2;
 using AutoFixture;
 using GameShop.Application.Queries.GetAllGames;
 using GameShop.Domain.Entities;
@@ -12,13 +11,6 @@ namespace GameShop.Application.UnitTests.Queries.GetAllGames;
 
 public class GetAllGamesHandlerTests
 {
-    private readonly IFixture _fixture;
-
-    public GetAllGamesHandlerTests()
-    {
-        _fixture = new Fixture().Customize(new AutoMoqCustomization());
-    }
-
     [Theory, AutoData]
     public async Task Handle_ShouldReturnSuccessResult_WhenGamesAreRetrieved(
         [Frozen] Mock<IGameRepository> gameRepositoryMock,

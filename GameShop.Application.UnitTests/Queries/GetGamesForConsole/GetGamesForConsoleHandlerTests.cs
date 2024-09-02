@@ -1,5 +1,4 @@
-﻿using AutoFixture.AutoMoq;
-using AutoFixture.Xunit2;
+﻿using AutoFixture.Xunit2;
 using AutoFixture;
 using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;
@@ -7,20 +6,11 @@ using Moq;
 using FluentAssertions;
 using System.Collections.Immutable;
 using GameShop.Application.Queries.GetGamesForConsole;
-using GameShop.Application.Queries.GetGamesByName;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace GameShop.Application.UnitTests.Queries.GetGamesForConsole;
 
 public class GetGamesForConsoleHandlerTests
 {
-    private readonly IFixture _fixture;
-
-    public GetGamesForConsoleHandlerTests()
-    {
-        _fixture = new Fixture().Customize(new AutoMoqCustomization());
-    }
-
     [Theory, AutoData]
     public async Task Handle_ShouldReturnFailureResult_WhenGameConsoleIsNotFound(
         [Frozen] Mock<IGameConsoleRepository> gameConsoleRepositoryMock,

@@ -2,6 +2,7 @@
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using GameShop.Application.Commands.AddGame;
+using GameShop.Application.Commands.DeleteGame;
 using GameShop.Application.Commands.UpdateGame;
 using GameShop.Application.Extensions;
 using GameShop.Domain.Entities;
@@ -12,13 +13,6 @@ namespace GameShop.Application.UnitTests.Extensions;
 
 public class GameExtensionsTests
 {
-    private readonly IFixture _fixture;
-
-    public GameExtensionsTests()
-    {
-        _fixture = new Fixture();
-    }
-
     public class AddGameCommandToDomain
     {
         [Theory, AutoData]
@@ -99,7 +93,7 @@ public class GameExtensionsTests
             var response = games.ToGetAllGamesResponse();
 
             // Assert
-            response.Games.Should().HaveCount(games.Count());
+            response.Games.Should().HaveCount(games.Length);
             response.Games.Select(g => g.Id).Should().BeEquivalentTo(games.Select(g => g.Id));
         }
 
@@ -119,7 +113,7 @@ public class GameExtensionsTests
             var response = games.ToGetGamesByNameResponse();
 
             // Assert
-            response.Games.Should().HaveCount(games.Count());
+            response.Games.Should().HaveCount(games.Length);
             response.Games.Select(g => g.Id).Should().BeEquivalentTo(games.Select(g => g.Id));
         }
 
@@ -139,7 +133,7 @@ public class GameExtensionsTests
             var response = games.ToGetGamesForConsoleResponse();
 
             // Assert
-            response.Games.Should().HaveCount(games.Count());
+            response.Games.Should().HaveCount(games.Length);
             response.Games.Select(g => g.Id).Should().BeEquivalentTo(games.Select(g => g.Id));
         }
     }
@@ -196,7 +190,7 @@ public class GameExtensionsTests
                 .Create();
 
             // Act
-            var response = game.ToDeleteGameResponse();
+            var response = new DeleteGameResponse();
 
             // Assert
             response.Should().NotBeNull();

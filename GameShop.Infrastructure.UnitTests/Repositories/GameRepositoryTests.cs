@@ -1,5 +1,3 @@
-using AutoFixture;
-using FluentAssertions;
 using GameShop.Domain.Entities;
 using GameShop.Infrastructure.Data;
 using GameShop.Infrastructure.Repositories;

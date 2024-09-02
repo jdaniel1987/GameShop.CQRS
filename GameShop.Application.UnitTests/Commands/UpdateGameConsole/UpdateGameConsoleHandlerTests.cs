@@ -1,5 +1,4 @@
 ﻿using AutoFixture;
-using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using GameShop.Application.Commands.UpdateGameConsole;
@@ -11,13 +10,6 @@ namespace GameShop.Application.UnitTests.Commands.UpdateGameConsole;
 
 public class UpdateGameConsoleHandlerTests
 {
-    private readonly IFixture _fixture;
-
-    public UpdateGameConsoleHandlerTests()
-    {
-        _fixture = new Fixture().Customize(new AutoMoqCustomization());
-    }
-
     [Theory, AutoData]
     public async Task Handle_ShouldUpdateGameConsole_WhenGameConsoleIsFound(
         [Frozen] Mock<IGameConsoleRepository> gameConsoleRepositoryMock,

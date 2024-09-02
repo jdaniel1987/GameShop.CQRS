@@ -1,6 +1,4 @@
-﻿using AutoFixture;
-using AutoFixture.AutoMoq;
-using AutoFixture.Xunit2;
+﻿using AutoFixture.Xunit2;
 using FluentAssertions;
 using GameShop.Application.Commands.AddGameConsole;
 using GameShop.Domain.Entities;
@@ -11,13 +9,6 @@ namespace GameShop.Application.UnitTests.Commands.AddGameConsole;
 
 public class AddGameConsoleHandlerTests
 {
-    private readonly IFixture _fixture;
-
-    public AddGameConsoleHandlerTests()
-    {
-        _fixture = new Fixture().Customize(new AutoMoqCustomization());
-    }
-
     [Theory, AutoData]
     public async Task Handle_ShouldAddGameConsoleSuccessfully(
         [Frozen] Mock<IGameConsoleRepository> gameConsoleRepositoryMock,

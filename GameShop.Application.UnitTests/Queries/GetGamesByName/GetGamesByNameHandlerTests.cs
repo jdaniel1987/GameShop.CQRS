@@ -1,5 +1,4 @@
-﻿using AutoFixture.AutoMoq;
-using AutoFixture.Xunit2;
+﻿using AutoFixture.Xunit2;
 using AutoFixture;
 using GameShop.Application.Queries.GetGamesByName;
 using GameShop.Domain.Entities;
@@ -7,20 +6,10 @@ using GameShop.Domain.Repositories;
 using Moq;
 using FluentAssertions;
 using System.Collections.Immutable;
-using GameShop.Application.Commands.AddGame;
-using MediatR;
-
 namespace GameShop.Application.UnitTests.Queries.GetGamesByName;
 
 public class GetGamesByNameHandlerTests
 {
-    private readonly IFixture _fixture;
-
-    public GetGamesByNameHandlerTests()
-    {
-        _fixture = new Fixture().Customize(new AutoMoqCustomization());
-    }
-
     [Theory, AutoData]
     public async Task Handle_ShouldReturnSuccessResult_WhenGamesAreFoundByName(
         [Frozen] Mock<IGameRepository> gameRepositoryMock,

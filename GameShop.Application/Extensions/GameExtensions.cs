@@ -1,5 +1,4 @@
 ﻿using GameShop.Application.Commands.AddGame;
-using GameShop.Application.Commands.DeleteGame;
 using GameShop.Application.Commands.UpdateGame;
 using GameShop.Application.Events.GameCreated;
 using GameShop.Application.Queries.GetAllGames;
@@ -82,7 +81,4 @@ public static class GameExtensions
         new(
             game.Id,
             game.Name);
-
-    public static DeleteGameResponse ToDeleteGameResponse(this Game game) =>
-        new();
 }

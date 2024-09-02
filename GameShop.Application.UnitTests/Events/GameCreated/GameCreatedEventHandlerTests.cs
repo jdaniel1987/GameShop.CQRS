@@ -21,7 +21,7 @@ public class GameCreatedEventHandlerTests
         // Assert
         emailSenderMock.Verify(s => s.SendNotification(
             "random@email.com",
-            $"{notification.CreationDate.ToString("dd-MM-yyyy HH:mm")} - New Game from {notification.Publisher}",
+            $"{notification.CreationDate:dd-MM-yyyy HH:mm} - New Game from {notification.Publisher}",
             $"Product {notification.GameName} with price USD {notification.PriceUSD} / EUR {notification.PriceEUR}"
             ), Times.Once);
     }

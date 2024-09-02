@@ -2,6 +2,7 @@
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using GameShop.Application.Commands.AddGameConsole;
+using GameShop.Application.Commands.DeleteGameConsole;
 using GameShop.Application.Commands.UpdateGameConsole;
 using GameShop.Application.Extensions;
 using GameShop.Domain.Entities;
@@ -11,13 +12,6 @@ namespace GameShop.Application.UnitTests.Extensions;
 
 public class GameConsoleExtensionsTests
 {
-    private readonly IFixture _fixture;
-
-    public GameConsoleExtensionsTests()
-    {
-        _fixture = new Fixture();
-    }
-
     public class AddGameConsoleCommandToDomain
     {
         [Theory, AutoData]
@@ -74,7 +68,7 @@ public class GameConsoleExtensionsTests
             var response = gameConsoles.ToGetAllGameConsolesResponse();
 
             // Assert
-            response.GameConsoles.Should().HaveCount(gameConsoles.Count());
+            response.GameConsoles.Should().HaveCount(gameConsoles.Length);
             response.GameConsoles.Select(gc => gc.Id).Should().BeEquivalentTo(gameConsoles.Select(gc => gc.Id));
             response.GameConsoles.Select(gc => gc.Name).Should().BeEquivalentTo(gameConsoles.Select(gc => gc.Name));
             response.GameConsoles.Select(gc => gc.Manufacturer).Should().BeEquivalentTo(gameConsoles.Select(gc => gc.Manufacturer));
@@ -138,7 +132,7 @@ public class GameConsoleExtensionsTests
                 .Create();
 
             // Act
-            var response = gameConsole.ToDeleteGameConsoleResponse();
+            var response = new DeleteGameConsoleResponse();
 
             // Assert
             response.Should().NotBeNull();

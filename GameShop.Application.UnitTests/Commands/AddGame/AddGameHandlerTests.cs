@@ -1,5 +1,4 @@
 ﻿using AutoFixture;
-using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using GameShop.Application.Commands.AddGame;
@@ -13,13 +12,6 @@ namespace GameShop.Application.UnitTests.Commands.AddGame;
 
 public class AddGameHandlerTests
 {
-    private readonly IFixture _fixture;
-
-    public AddGameHandlerTests()
-    {
-        _fixture = new Fixture().Customize(new AutoMoqCustomization());
-    }
-
     [Theory, AutoData]
     public async Task Handle_ShouldReturnFailureResult_WhenGameConsoleIsNotFound(
         [Frozen] Mock<IGameConsoleRepository> gameConsoleRepositoryMock,

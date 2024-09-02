@@ -1,12 +1,5 @@
-﻿using AutoFixture;
-using AutoFixture.AutoMoq;
-using AutoFixture.Xunit2;
-using FluentAssertions;
-using FluentValidation.TestHelper;
+﻿using FluentValidation.TestHelper;
 using GameShop.Application.Commands.UpdateGameConsole;
-using GameShop.Domain.Entities;
-using GameShop.Domain.Repositories;
-using Moq;
 
 namespace GameShop.Application.UnitTests.Commands.UpdateGameConsole;
 

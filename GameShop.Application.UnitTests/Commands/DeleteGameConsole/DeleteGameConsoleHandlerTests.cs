@@ -1,24 +1,15 @@
 ﻿using AutoFixture;
-using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using GameShop.Application.Commands.DeleteGameConsole;
 using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;
-using MediatR;
 using Moq;
 
 namespace GameShop.Application.UnitTests.Commands.DeleteGameConsole;
 
 public class DeleteGameConsoleHandlerTests
 {
-    private readonly IFixture _fixture;
-
-    public DeleteGameConsoleHandlerTests()
-    {
-        _fixture = new Fixture().Customize(new AutoMoqCustomization());
-    }
-
     [Theory, AutoData]
     public async Task Handle_ShouldReturnFailureResult_WhenGameConsoleIsNotFound(
         [Frozen] Mock<IGameConsoleRepository> gameConsoleRepositoryMock,

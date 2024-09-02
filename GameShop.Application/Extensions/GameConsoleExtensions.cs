@@ -1,5 +1,4 @@
 ﻿using GameShop.Application.Commands.AddGameConsole;
-using GameShop.Application.Commands.DeleteGameConsole;
 using GameShop.Application.Commands.UpdateGameConsole;
 using GameShop.Application.Queries.GetAllGameConsoles;
 using GameShop.Domain.Entities;
@@ -49,7 +48,4 @@ public static class GameConsoleExtensions
         new(
             gameConsole.Id,
             gameConsole.Name);
-
-    public static DeleteGameConsoleResponse ToDeleteGameConsoleResponse(this GameConsole gameConsole) =>
-        new();
 }

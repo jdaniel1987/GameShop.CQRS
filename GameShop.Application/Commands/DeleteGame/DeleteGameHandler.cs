@@ -1,5 +1,4 @@
 ﻿using CSharpFunctionalExtensions;
-using GameShop.Application.Extensions;
 using GameShop.Domain.Repositories;
 using MediatR;
 
@@ -18,6 +17,6 @@ public class DeleteGameHandler(IGameRepository gameRepository) : IRequestHandler
         }
         await _gameRepository.DeleteGame(game, cancellationToken);
 
-        return Result.Success(game.ToDeleteGameResponse());
+        return Result.Success(new DeleteGameResponse());
     }
 }
