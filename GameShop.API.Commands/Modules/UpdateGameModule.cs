@@ -1,5 +1,6 @@
 ﻿using Carter;
-using GameShop.Application.Commands.UpdateGame;
+using GameShop.Application.Extensions;
+using GameShop.Contracts.Requests;
 using GameShop.Domain.Entities;
 using MediatR;
 
@@ -9,8 +10,9 @@ public class UpdateGameModule : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPut("api/UpdateGame", async (IMediator mediator, UpdateGameCommand command, CancellationToken cancellationToken) =>
+        app.MapPut("api/UpdateGame", async (IMediator mediator, UpdateGameRequest request, CancellationToken cancellationToken) =>
         {
+            var command = request.ToCommand();
             var result = await mediator.Send(command, cancellationToken);
 
             return result.IsSuccess ? 

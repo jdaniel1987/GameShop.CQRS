@@ -1,4 +1,4 @@
-using GameShop.Application.Commands.AddGame;
+using GameShop.Contracts.Requests;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +17,7 @@ public sealed class AddGameIntegrationTests : ApiBaseTests
             .Without(gc => gc.Games)
             .Create();
 
-        var addGameCommand = fixture.Build<AddGameCommand>()
+        var addGameRequest = fixture.Build<AddGameRequest>()
             .With(g => g.GameConsoleId, existingGameConsole.Id)
             .Create();
 
@@ -27,14 +27,14 @@ public sealed class AddGameIntegrationTests : ApiBaseTests
         var expected = new Game()
         {
             Id = 1,
-            Publisher = addGameCommand.Publisher,
-            GameConsoleId = addGameCommand.GameConsoleId,
-            Name = addGameCommand.Name,
-            Price = Price.Create(addGameCommand.Price),
+            Publisher = addGameRequest.Publisher,
+            GameConsoleId = addGameRequest.GameConsoleId,
+            Name = addGameRequest.Name,
+            Price = Price.Create(addGameRequest.Price),
         };
 
         // Act
-        var response = await ApiClient.PostAsJsonAsync("api/AddGame", addGameCommand);
+        var response = await ApiClient.PostAsJsonAsync("api/AddGame", addGameRequest);
 
         // Assert
         var actualReadOnlyDb = await ReadOnlyDbContext.Games.SingleAsync();

@@ -4,6 +4,7 @@ using GameShop.Application.Events.GameCreated;
 using GameShop.Application.Queries.GetAllGames;
 using GameShop.Application.Queries.GetGamesByName;
 using GameShop.Application.Queries.GetGamesForConsole;
+using GameShop.Contracts.Requests;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
 using System.Collections.Immutable;
@@ -12,6 +13,21 @@ namespace GameShop.Application.Extensions;
 
 public static class GameExtensions
 {
+    public static AddGameCommand ToCommand(this AddGameRequest game) =>
+        new(
+            game.Name,
+            game.Publisher,
+            game.GameConsoleId,
+            game.Price);
+
+    public static UpdateGameCommand ToCommand(this UpdateGameRequest game) =>
+        new(
+            game.Id,
+            game.Name,
+            game.Publisher,
+            game.GameConsoleId,
+            game.Price);
+
     public static Game ToDomain(this AddGameCommand command) =>
         new()
         {

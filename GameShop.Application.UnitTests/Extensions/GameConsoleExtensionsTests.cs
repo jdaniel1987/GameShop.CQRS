@@ -2,6 +2,7 @@
 using GameShop.Application.Commands.DeleteGameConsole;
 using GameShop.Application.Commands.UpdateGameConsole;
 using GameShop.Application.Extensions;
+using GameShop.Contracts.Requests;
 using GameShop.Domain.Entities;
 using System.Collections.Immutable;
 
@@ -9,6 +10,37 @@ namespace GameShop.Application.UnitTests.Extensions;
 
 public sealed class GameConsoleExtensionsTests
 {
+    public sealed class AddGameConsoleRequestToCommand
+    {
+        [Theory, AutoData]
+        public void ToCommand_ShouldConvertAddGameConsoleRequestToAddGameConsoleCommand(AddGameConsoleRequest request)
+        {
+            // Act
+            var command = request.ToCommand();
+
+            // Assert
+            command.Name.Should().Be(request.Name);
+            command.Manufacturer.Should().Be(request.Manufacturer);
+            command.Price.Should().Be(request.Price);
+        }
+    }
+
+    public sealed class UpdateGameConsoleRequestToCommand
+    {
+        [Theory, AutoData]
+        public void ToCommand_ShouldConvertUpdateGameConsoleRequestToUpdateGameConsoleCommand(UpdateGameConsoleRequest request)
+        {
+            // Act
+            var command = request.ToCommand();
+
+            // Assert
+            command.Id.Should().Be(request.Id);
+            command.Name.Should().Be(request.Name);
+            command.Manufacturer.Should().Be(request.Manufacturer);
+            command.Price.Should().Be(request.Price);
+        }
+    }
+
     public sealed class AddGameConsoleCommandToDomain
     {
         [Theory, AutoData]

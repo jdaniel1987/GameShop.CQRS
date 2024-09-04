@@ -6,6 +6,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GameShop.Contracts\GameShop.Contracts.csproj" />
     <ProjectReference Include="..\GameShop.Infrastructure\GameShop.Infrastructure.csproj" />
   </ItemGroup>
   

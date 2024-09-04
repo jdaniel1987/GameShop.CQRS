@@ -1,4 +1,4 @@
-using GameShop.Application.Commands.AddGameConsole;
+using GameShop.Contracts.Requests;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
@@ -9,17 +9,17 @@ public sealed class AddGameConsoleIntegrationTests : ApiBaseTests
 {
     [Theory, AutoData]
     public async Task Should_add_games_console(
-        AddGameConsoleCommand addGameConsoleCommand)
+        AddGameConsoleRequest addGameConsoleRequest)
     {
         // Act
-        var response = await ApiClient.PostAsJsonAsync("api/AddGameConsole", addGameConsoleCommand);
+        var response = await ApiClient.PostAsJsonAsync("api/AddGameConsole", addGameConsoleRequest);
 
         var expected = new GameConsole()
         {
             Id = 1,
-            Manufacturer = addGameConsoleCommand.Manufacturer,
-            Name = addGameConsoleCommand.Name,
-            Price = Price.Create(addGameConsoleCommand.Price),
+            Manufacturer = addGameConsoleRequest.Manufacturer,
+            Name = addGameConsoleRequest.Name,
+            Price = Price.Create(addGameConsoleRequest.Price),
         };
 
         // Assert

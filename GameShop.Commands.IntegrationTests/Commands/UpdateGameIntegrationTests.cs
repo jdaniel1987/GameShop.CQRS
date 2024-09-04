@@ -1,4 +1,4 @@
-using GameShop.Application.Commands.UpdateGame;
+using GameShop.Contracts.Requests;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
@@ -27,29 +27,29 @@ public sealed class UpdateGameIntegrationTests : ApiBaseTests
         await WriteReadDbContext.AddAsync(existingGame);
         await WriteReadDbContext.SaveChangesAsync();
 
-        var updateGameCommand = fixture
-            .Build<UpdateGameCommand>()
+        var updateGameRequest = fixture
+            .Build<UpdateGameRequest>()
             .With(c => c.Id, existingGame.Id)
             .With(c => c.GameConsoleId, existingGameConsoles.Last().Id)
             .Create();
 
         var expected = new Game()
         {
-            Id = updateGameCommand.Id,
-            Name = updateGameCommand.Name,
-            GameConsoleId = updateGameCommand.GameConsoleId,
-            Price = Price.Create(updateGameCommand.Price),
-            Publisher = updateGameCommand.Publisher,
+            Id = updateGameRequest.Id,
+            Name = updateGameRequest.Name,
+            GameConsoleId = updateGameRequest.GameConsoleId,
+            Price = Price.Create(updateGameRequest.Price),
+            Publisher = updateGameRequest.Publisher,
         };
 
         // Act
-        var response = await ApiClient.PutAsJsonAsync($"api/UpdateGame", updateGameCommand);
+        var response = await ApiClient.PutAsJsonAsync($"api/UpdateGame", updateGameRequest);
 
         // Assert
         var actual = await WriteReadDbContext
             .Games
             .AsNoTracking()
-            .Where(g => g.Id == updateGameCommand.Id)
+            .Where(g => g.Id == updateGameRequest.Id)
             .SingleAsync();
 
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);

@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShop.Contracts", "GameShop.Contracts\GameShop.Contracts.csproj", "{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{9A0F8170-5A73-40FC-93D0-B984152C7659}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A0F8170-5A73-40FC-93D0-B984152C7659}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A0F8170-5A73-40FC-93D0-B984152C7659}.Release|Any CPU.Build.0 = Release|Any CPU
+		{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +100,7 @@ Global
 		{0291C3D2-0B3E-4528-A8EE-42504EC23AEF} = {F15E2B3F-3C05-409D-9C8B-D4E72AC83839}
 		{17BAADFD-5BB5-4769-A15B-9E6CFE4045DA} = {F15E2B3F-3C05-409D-9C8B-D4E72AC83839}
 		{9A0F8170-5A73-40FC-93D0-B984152C7659} = {F15E2B3F-3C05-409D-9C8B-D4E72AC83839}
+		{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8} = {56803A6F-DB04-4402-96A0-924DD0855036}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5319A54F-633D-46F7-85DF-F2EF51C69DB0}

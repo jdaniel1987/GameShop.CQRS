@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameShop.Application\GameShop.Application.csproj" />
+    <ProjectReference Include="..\GameShop.Contracts\GameShop.Contracts.csproj" />
     <ProjectReference Include="..\GameShop.Infrastructure\GameShop.Infrastructure.csproj" />
   </ItemGroup>
 

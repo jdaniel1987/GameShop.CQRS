@@ -1,6 +1,7 @@
 ﻿using GameShop.Application.Commands.AddGameConsole;
 using GameShop.Application.Commands.UpdateGameConsole;
 using GameShop.Application.Queries.GetAllGameConsoles;
+using GameShop.Contracts.Requests;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
 using System.Collections.Immutable;
@@ -9,6 +10,18 @@ namespace GameShop.Application.Extensions;
 
 public static class GameConsoleExtensions
 {
+    public static AddGameConsoleCommand ToCommand(this AddGameConsoleRequest gameConsole) =>
+        new(
+            gameConsole.Name,
+            gameConsole.Manufacturer,
+            gameConsole.Price);
+    public static UpdateGameConsoleCommand ToCommand(this UpdateGameConsoleRequest gameConsole) =>
+        new(
+            gameConsole.Id,
+            gameConsole.Name,
+            gameConsole.Manufacturer,
+            gameConsole.Price);
+
     public static GameConsole ToDomain(this AddGameConsoleCommand command) =>
         new()
         {

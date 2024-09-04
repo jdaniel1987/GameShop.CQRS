@@ -11,7 +11,8 @@ public class DeleteGameModule : ICarterModule
     {
         app.MapDelete("api/DeleteGame/{GameId:int}", async (IMediator mediator, int GameId, CancellationToken cancellationToken) =>
         {
-            var result = await mediator.Send(new DeleteGameCommand(GameId), cancellationToken);
+            var command = new DeleteGameCommand(GameId);
+            var result = await mediator.Send(command, cancellationToken);
 
             return result.IsSuccess ? 
                 Results.NoContent() : 
