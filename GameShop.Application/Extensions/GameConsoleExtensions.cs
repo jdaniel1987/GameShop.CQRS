@@ -1,9 +1,9 @@
 ﻿using GameShop.Application.Commands.AddGameConsole;
 using GameShop.Application.Commands.UpdateGameConsole;
 using GameShop.Application.Queries.GetAllGameConsoles;
-using GameShop.Contracts.Requests;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
+using GameShop.Write.Contracts.Requests;
 using System.Collections.Immutable;
 
 namespace GameShop.Application.Extensions;

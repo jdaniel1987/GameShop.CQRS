@@ -2,9 +2,9 @@
 using GameShop.Application.Commands.DeleteGame;
 using GameShop.Application.Commands.UpdateGame;
 using GameShop.Application.Extensions;
-using GameShop.Contracts.Requests;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
+using GameShop.Write.Contracts.Requests;
 using System.Collections.Immutable;
 
 namespace GameShop.Application.UnitTests.Extensions;

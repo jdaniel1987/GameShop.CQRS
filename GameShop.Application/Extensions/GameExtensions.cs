@@ -4,9 +4,9 @@ using GameShop.Application.Events.GameCreated;
 using GameShop.Application.Queries.GetAllGames;
 using GameShop.Application.Queries.GetGamesByName;
 using GameShop.Application.Queries.GetGamesForConsole;
-using GameShop.Contracts.Requests;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
+using GameShop.Write.Contracts.Requests;
 using System.Collections.Immutable;
 
 namespace GameShop.Application.Extensions;

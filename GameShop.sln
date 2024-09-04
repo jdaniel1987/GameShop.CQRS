@@ -11,15 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Domain", "GameShop
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Infrastructure", "GameShop.Infrastructure\GameShop.Infrastructure.csproj", "{A659C1AC-D4CE-49EF-99CE-83874A11BBD9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.API.Queries", "GameShop.API.Queries\GameShop.API.Queries.csproj", "{27C262E1-3AB0-4342-8812-3B0ED5676E91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.API.Read", "GameShop.API.Read\GameShop.API.Read.csproj", "{27C262E1-3AB0-4342-8812-3B0ED5676E91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.API.Commands", "GameShop.API.Commands\GameShop.API.Commands.csproj", "{3E3C3481-3C86-42B6-B0C1-B2336223ABF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.API.Write", "GameShop.API.Write\GameShop.API.Write.csproj", "{3E3C3481-3C86-42B6-B0C1-B2336223ABF1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Application", "GameShop.Application\GameShop.Application.csproj", "{61B2D1EA-4B50-4746-AEF2-68384E194C1D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Queries.IntegrationTests", "GameShop.Queries.IntegrationTests\GameShop.Queries.IntegrationTests.csproj", "{FE2C51FD-0E59-4EBC-B07D-7199B45DD2B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Read.IntegrationTests", "GameShop.Read.IntegrationTests\GameShop.Read.IntegrationTests.csproj", "{FE2C51FD-0E59-4EBC-B07D-7199B45DD2B7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Commands.IntegrationTests", "GameShop.Commands.IntegrationTests\GameShop.Commands.IntegrationTests.csproj", "{504AA152-B29E-4037-BC39-8A36FD41FF04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Write.IntegrationTests", "GameShop.Write.IntegrationTests\GameShop.Write.IntegrationTests.csproj", "{504AA152-B29E-4037-BC39-8A36FD41FF04}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Infrastructure.UnitTests", "GameShop.Infrastructure.UnitTests\GameShop.Infrastructure.UnitTests.csproj", "{0291C3D2-0B3E-4528-A8EE-42504EC23AEF}"
 EndProject
@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShop.Contracts", "GameShop.Contracts\GameShop.Contracts.csproj", "{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShop.Write.Contracts", "GameShop.Write.Contracts\GameShop.Write.Contracts.csproj", "{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

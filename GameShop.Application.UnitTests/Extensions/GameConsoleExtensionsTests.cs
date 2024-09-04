@@ -2,8 +2,8 @@
 using GameShop.Application.Commands.DeleteGameConsole;
 using GameShop.Application.Commands.UpdateGameConsole;
 using GameShop.Application.Extensions;
-using GameShop.Contracts.Requests;
 using GameShop.Domain.Entities;
+using GameShop.Write.Contracts.Requests;
 using System.Collections.Immutable;
 
 namespace GameShop.Application.UnitTests.Extensions;
