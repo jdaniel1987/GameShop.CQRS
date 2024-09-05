@@ -1,4 +1,4 @@
-﻿namespace GameShop.Application.Commands.UpdateGameConsole;
+﻿namespace GameShop.API.Write.Contracts.Responses;
 
 public record UpdateGameConsoleResponse(
     int Id,

@@ -1,6 +1,6 @@
 ﻿namespace GameShop.Application.Queries.GetAllGameConsoles;
 
-public record GetAllGameConsolesResponseItem(
+public record GetAllGameConsolesQueryResponseItem(
     int Id,
     string Name,
     string Manufacturer,

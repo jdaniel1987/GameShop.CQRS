@@ -1,4 +1,5 @@
-﻿using GameShop.Application.Commands.AddGame;
+﻿using GameShop.API.Write.Contracts.Responses;
+using GameShop.Application.Commands.AddGame;
 using GameShop.Application.Events.GameCreated;
 using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;

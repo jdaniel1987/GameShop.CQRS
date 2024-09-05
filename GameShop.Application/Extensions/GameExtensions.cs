@@ -1,4 +1,7 @@
-﻿using GameShop.Application.Commands.AddGame;
+﻿using GameShop.API.Read.Contracts.Responses;
+using GameShop.API.Write.Contracts.Requests;
+using GameShop.API.Write.Contracts.Responses;
+using GameShop.Application.Commands.AddGame;
 using GameShop.Application.Commands.UpdateGame;
 using GameShop.Application.Events.GameCreated;
 using GameShop.Application.Queries.GetAllGames;
@@ -6,7 +9,6 @@ using GameShop.Application.Queries.GetGamesByName;
 using GameShop.Application.Queries.GetGamesForConsole;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
-using GameShop.Write.Contracts.Requests;
 using System.Collections.Immutable;
 
 namespace GameShop.Application.Extensions;
@@ -55,9 +57,9 @@ public static class GameExtensions
             PriceEUR: ((PriceEuros)game.Price).Value, // Conversion is automatic due to ValueObject operator
             CreationDate: DateTime.UtcNow);
 
-    public static GetAllGamesResponse ToGetAllGamesResponse(this IReadOnlyCollection<Game> games) =>
+    public static GetAllGamesQueryResponse ToGetAllGamesQueryResponse(this IReadOnlyCollection<Game> games) =>
         new(games.Select(g => 
-            new GetAllGamesResponseItem(
+            new GetAllGamesQueryResponseItem(
                 g.Id,
                 g.Name,
                 g.Publisher,
@@ -66,9 +68,9 @@ public static class GameExtensions
                 g.GameConsole!.Name))
             .ToImmutableArray());
 
-    public static GetGamesByNameResponse ToGetGamesByNameResponse(this IReadOnlyCollection<Game> games) =>
+    public static GetGamesByNameQueryResponse ToGetGamesByNameQueryResponse(this IReadOnlyCollection<Game> games) =>
         new(games.Select(g =>
-            new GetGamesByNameResponseItem(
+            new GetGamesByNameQueryResponseItem(
                 g.Id,
                 g.Name,
                 g.Publisher,
@@ -77,9 +79,9 @@ public static class GameExtensions
                 g.GameConsole!.Name))
             .ToImmutableArray());
 
-    public static GetGamesForConsoleResponse ToGetGamesForConsoleResponse(this IReadOnlyCollection<Game> games) =>
+    public static GetGamesForConsoleQueryResponse ToGetGamesForConsoleQueryResponse(this IReadOnlyCollection<Game> games) =>
         new(games.Select(g =>
-            new GetGamesForConsoleResponseItem(
+            new GetGamesForConsoleQueryResponseItem(
                 g.Id,
                 g.Name,
                 g.Publisher,
@@ -88,13 +90,49 @@ public static class GameExtensions
                 g.GameConsole!.Name))
             .ToImmutableArray());
 
-    public static AddGameResponse ToAddGameResponse(this Game game) =>
+    public static AddGameResponse ToAddGameCommandResponse(this Game game) =>
         new(
             game.Id, 
             game.Name);
 
-    public static UpdateGameResponse ToUpdateGameResponse(this Game game) =>
+    public static UpdateGameResponse ToUpdateGameCommandResponse(this Game game) =>
         new(
             game.Id,
             game.Name);
+
+    public static GetAllGamesResponse ToGetAllGamesResponse(this GetAllGamesQueryResponse response) =>
+        new(
+            response.Games.Select(gc =>
+                new GetAllGamesResponseItem(
+                    gc.Id,
+                    gc.Name,
+                    gc.Publisher,
+                    gc.Price,
+                    gc.GameConsoleId,
+                    gc.GameConsoleName))
+            .ToImmutableArray());
+
+    public static GetGamesByNameResponse ToGetGamesByNameResponse(this GetGamesByNameQueryResponse response) =>
+        new(
+            response.Games.Select(gc =>
+                new GetGamesByNameResponseItem(
+                    gc.Id,
+                    gc.Name,
+                    gc.Publisher,
+                    gc.Price,
+                    gc.GameConsoleId,
+                    gc.GameConsoleName))
+            .ToImmutableArray());
+
+    public static GetGamesForConsoleResponse ToGetGamesForConsoleResponse(this GetGamesForConsoleQueryResponse response) =>
+        new(
+            response.Games.Select(gc =>
+                new GetGamesForConsoleResponseItem(
+                    gc.Id,
+                    gc.Name,
+                    gc.Publisher,
+                    gc.Price,
+                    gc.GameConsoleId,
+                    gc.GameConsoleName))
+            .ToImmutableArray());
 }

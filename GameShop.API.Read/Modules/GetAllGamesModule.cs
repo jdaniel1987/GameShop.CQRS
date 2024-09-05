@@ -1,4 +1,5 @@
 ﻿using Carter;
+using GameShop.Application.Extensions;
 using GameShop.Application.Queries.GetAllGames;
 using GameShop.Domain.Entities;
 using MediatR;
@@ -14,7 +15,7 @@ public class GetAllGamesModule : ICarterModule
             var result = await mediator.Send(new GetAllGamesQuery());
 
             return result.IsSuccess ?
-                Results.Ok(result.Value) :
+                Results.Ok(result.Value.ToGetAllGamesResponse()) :
                 Results.BadRequest(result.Error);
         })
         .WithOpenApi(operation =>

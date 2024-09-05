@@ -26,8 +26,8 @@ public sealed class GetGamesByNameHandlerTests
             .Setup(repo => repo.GetGamesByName(It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(games);
 
-        var expected = new GetGamesByNameResponse(games
-            .Select(g => new GetGamesByNameResponseItem(
+        var expected = new GetGamesByNameQueryResponse(games
+            .Select(g => new GetGamesByNameQueryResponseItem(
                 g.Id,
                 g.Name,
                 g.Publisher,

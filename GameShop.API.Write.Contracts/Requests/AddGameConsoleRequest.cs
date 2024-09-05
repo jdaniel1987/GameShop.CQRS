@@ -1,4 +1,4 @@
-﻿namespace GameShop.Write.Contracts.Requests;
+﻿namespace GameShop.API.Write.Contracts.Requests;
 
 public record AddGameConsoleRequest(
     string Name,

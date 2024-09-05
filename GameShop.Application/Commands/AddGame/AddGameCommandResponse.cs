@@ -1,5 +1,5 @@
 ﻿namespace GameShop.Application.Commands.AddGame;
 
-public record AddGameResponse(
+public record AddGameCommandResponse(
     int Id,
     string Name);

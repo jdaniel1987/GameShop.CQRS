@@ -2,6 +2,7 @@
 using MediatR;
 using GameShop.Application.Extensions;
 using CSharpFunctionalExtensions;
+using GameShop.API.Write.Contracts.Responses;
 
 namespace GameShop.Application.Commands.UpdateGame;
 
@@ -22,6 +23,6 @@ public class UpdateGameHandler(
         var game = request.ToDomain();
         await _gameRepository.UpdateGame(game, cancellationToken);
 
-        return Result.Success(game.ToUpdateGameResponse());
+        return Result.Success(game.ToUpdateGameCommandResponse());
     }
 }

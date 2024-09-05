@@ -1,4 +1,5 @@
 ﻿using Carter;
+using GameShop.Application.Extensions;
 using GameShop.Application.Queries.GetGamesForConsole;
 using GameShop.Domain.Entities;
 using MediatR;
@@ -15,7 +16,7 @@ public class GetGamesForConsoleModule : ICarterModule
             var result = await mediator.Send(new GetGamesForConsoleQuery(gameConsoleId));
 
             return result.IsSuccess ?
-                Results.Ok(result.Value) :
+                Results.Ok(result.Value.ToGetGamesForConsoleResponse()) :
                 Results.BadRequest(result.Error);
         })
         .WithOpenApi(operation =>

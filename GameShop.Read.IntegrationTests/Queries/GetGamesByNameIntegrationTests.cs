@@ -1,4 +1,4 @@
-using GameShop.Application.Queries.GetGamesByName;
+using GameShop.API.Read.Contracts.Responses;
 using GameShop.Domain.Entities;
 using System.Collections.Immutable;
 

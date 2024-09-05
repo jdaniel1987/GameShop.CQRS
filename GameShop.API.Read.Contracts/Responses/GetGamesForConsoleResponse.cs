@@ -1,3 +1,3 @@
-﻿namespace GameShop.Application.Queries.GetGamesForConsole;
+﻿namespace GameShop.API.Read.Contracts.Responses;
 
 public record GetGamesForConsoleResponse(IReadOnlyCollection<GetGamesForConsoleResponseItem> Games);

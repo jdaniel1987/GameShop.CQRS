@@ -33,6 +33,6 @@ public sealed class UpdateGameConsoleHandlerTests
         gameConsoleRepositoryMock.Verify(repo => repo.UpdateGameConsole(It.IsAny<GameConsole>(), It.IsAny<CancellationToken>()), Times.Once);
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().NotBeNull();
-        result.Value.Should().BeOfType<UpdateGameConsoleResponse>();
+        result.Value.Should().BeOfType<UpdateGameConsoleCommandResponse>();
     }
 }

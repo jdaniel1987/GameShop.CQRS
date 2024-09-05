@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameShop.API.Write\GameShop.API.Write.csproj" />
-    <ProjectReference Include="..\GameShop.Write.Contracts\GameShop.Write.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

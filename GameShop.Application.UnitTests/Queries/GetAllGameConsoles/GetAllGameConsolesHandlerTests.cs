@@ -27,8 +27,8 @@ public sealed class GetAllGameConsolesHandlerTests
             .Setup(repo => repo.GetAllGameConsoles(It.IsAny<CancellationToken>()))
             .ReturnsAsync(gameConsoles);
 
-        var expected = new GetAllGameConsolesResponse(gameConsoles
-            .Select(g => new GetAllGameConsolesResponseItem(
+        var expected = new GetAllGameConsolesQueryResponse(gameConsoles
+            .Select(g => new GetAllGameConsolesQueryResponseItem(
                 g.Id,
                 g.Name,
                 g.Manufacturer,

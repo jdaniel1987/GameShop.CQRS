@@ -1,6 +1,6 @@
+using GameShop.API.Write.Contracts.Requests;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
-using GameShop.Write.Contracts.Requests;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

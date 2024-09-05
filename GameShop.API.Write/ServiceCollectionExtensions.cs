@@ -11,6 +11,9 @@ public static class ServiceCollectionExtensions
         services.AddInfrastructure(configuration);
         services.AddApplication();
 
+        //services.AddRefitClient<IShowApi>()
+        //        .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://your-api-url.com")); // Reemplaza con la URL base de tu API
+
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();

@@ -1,4 +1,4 @@
-﻿namespace GameShop.Application.Commands.AddGameConsole;
+﻿namespace GameShop.API.Write.Contracts.Responses;
 
 public record AddGameConsoleResponse(
     int Id,

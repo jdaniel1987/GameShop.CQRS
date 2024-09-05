@@ -1,3 +1,3 @@
 ﻿namespace GameShop.Application.Commands.DeleteGame;
 
-public record DeleteGameResponse();
+public record DeleteGameCommandResponse();

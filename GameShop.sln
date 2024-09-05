@@ -33,7 +33,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShop.Write.Contracts", "GameShop.Write.Contracts\GameShop.Write.Contracts.csproj", "{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.API.Write.Contracts", "GameShop.API.Write.Contracts\GameShop.API.Write.Contracts.csproj", "{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.API.Read.Contracts", "GameShop.API.Read.Contracts\GameShop.API.Read.Contracts.csproj", "{C94B5A61-DE4E-491A-B579-F562CA3885B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C94B5A61-DE4E-491A-B579-F562CA3885B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C94B5A61-DE4E-491A-B579-F562CA3885B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C94B5A61-DE4E-491A-B579-F562CA3885B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C94B5A61-DE4E-491A-B579-F562CA3885B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{17BAADFD-5BB5-4769-A15B-9E6CFE4045DA} = {F15E2B3F-3C05-409D-9C8B-D4E72AC83839}
 		{9A0F8170-5A73-40FC-93D0-B984152C7659} = {F15E2B3F-3C05-409D-9C8B-D4E72AC83839}
 		{369E0B0A-887E-4EB3-A69D-9CDC7C1CFDD8} = {56803A6F-DB04-4402-96A0-924DD0855036}
+		{C94B5A61-DE4E-491A-B579-F562CA3885B6} = {56803A6F-DB04-4402-96A0-924DD0855036}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5319A54F-633D-46F7-85DF-F2EF51C69DB0}

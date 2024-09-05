@@ -1,9 +1,10 @@
-﻿using GameShop.Application.Commands.AddGameConsole;
+﻿using GameShop.API.Read.Contracts.Responses;
+using GameShop.API.Write.Contracts.Requests;
+using GameShop.Application.Commands.AddGameConsole;
 using GameShop.Application.Commands.UpdateGameConsole;
 using GameShop.Application.Queries.GetAllGameConsoles;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
-using GameShop.Write.Contracts.Requests;
 using System.Collections.Immutable;
 
 namespace GameShop.Application.Extensions;
@@ -15,6 +16,7 @@ public static class GameConsoleExtensions
             gameConsole.Name,
             gameConsole.Manufacturer,
             gameConsole.Price);
+
     public static UpdateGameConsoleCommand ToCommand(this UpdateGameConsoleRequest gameConsole) =>
         new(
             gameConsole.Id,
@@ -42,9 +44,19 @@ public static class GameConsoleExtensions
             Games = []
         };
 
-    public static GetAllGameConsolesResponse ToGetAllGameConsolesResponse(this IReadOnlyCollection<GameConsole> gameConsoles) =>
+    public static AddGameConsoleCommandResponse ToAddGameConsoleCommandResponse(this GameConsole gameConsole) =>
+        new(
+            gameConsole.Id,
+            gameConsole.Name);
+
+    public static UpdateGameConsoleCommandResponse ToUpdateGameConsoleCommandResponse(this GameConsole gameConsole) =>
+        new(
+            gameConsole.Id,
+            gameConsole.Name);
+
+    public static GetAllGameConsolesQueryResponse ToGetAllGameConsolesQueryResponse(this IReadOnlyCollection<GameConsole> gameConsoles) =>
         new(gameConsoles.Select(gc =>
-            new GetAllGameConsolesResponseItem(
+            new GetAllGameConsolesQueryResponseItem(
                 gc.Id,
                 gc.Name,
                 gc.Manufacturer,
@@ -52,13 +64,14 @@ public static class GameConsoleExtensions
                 gc.Games.Count))
             .ToImmutableArray());
 
-    public static AddGameConsoleResponse ToAddGameConsoleResponse(this GameConsole gameConsole) =>
+    public static GetAllGameConsolesResponse ToGetAllGameConsolesResponse(this GetAllGameConsolesQueryResponse response) =>
         new(
-            gameConsole.Id,
-            gameConsole.Name);
-
-    public static UpdateGameConsoleResponse ToUpdateGameConsoleResponse(this GameConsole gameConsole) =>
-        new(
-            gameConsole.Id,
-            gameConsole.Name);
+            response.GameConsoles.Select(gc =>
+                new GetAllGameConsolesResponseItem(
+                    gc.Id,
+                    gc.Name,
+                    gc.Manufacturer,
+                    gc.Price,
+                    gc.NumberOfGames))
+            .ToImmutableArray());
 }

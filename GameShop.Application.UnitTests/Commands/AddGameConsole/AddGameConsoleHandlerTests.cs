@@ -25,6 +25,6 @@ public sealed class AddGameConsoleHandlerTests
         gameConsoleRepositoryMock.Verify(repo => repo.AddGameConsole(It.IsAny<GameConsole>(), It.IsAny<CancellationToken>()), Times.Once);
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().NotBeNull();
-        result.Value.Should().BeOfType<AddGameConsoleResponse>();
+        result.Value.Should().BeOfType<AddGameConsoleCommandResponse>();
     }
 }

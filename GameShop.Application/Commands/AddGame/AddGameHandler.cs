@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using GameShop.API.Write.Contracts.Responses;
 using GameShop.Application.Extensions;
 using GameShop.Domain.Repositories;
 using MediatR;
@@ -28,6 +29,6 @@ public class AddGameHandler(
         var gameCreatedEvent = game.ToEvent();
         await _mediatorPublisher.Publish(gameCreatedEvent, cancellationToken);
 
-        return Result.Success(game.ToAddGameResponse());
+        return Result.Success(game.ToAddGameCommandResponse());
     }
 }

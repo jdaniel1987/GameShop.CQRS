@@ -1,6 +1,6 @@
-﻿namespace GameShop.Application.Queries.GetGamesForConsole;
+﻿namespace GameShop.Application.Queries.GetAllGames;
 
-public record GetGamesForConsoleResponseItem(
+public record GetAllGamesQueryResponseItem(
     int Id,
     string Name,
     string Publisher,

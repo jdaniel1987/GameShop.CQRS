@@ -56,8 +56,8 @@ public sealed class GetGamesForConsoleHandlerTests
             .Setup(repo => repo.GetGameConsole(query.GameConsoleId, It.IsAny<CancellationToken>()))
             .ReturnsAsync(gameConsole);
 
-        var expected = new GetGamesForConsoleResponse(games
-            .Select(g => new GetGamesForConsoleResponseItem(
+        var expected = new GetGamesForConsoleQueryResponse(games
+            .Select(g => new GetGamesForConsoleQueryResponseItem(
                 g.Id,
                 g.Name,
                 g.Publisher,

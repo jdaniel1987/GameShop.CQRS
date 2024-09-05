@@ -1,7 +1,7 @@
 ﻿using Carter;
+using GameShop.API.Write.Contracts.Requests;
 using GameShop.Application.Extensions;
 using GameShop.Domain.Entities;
-using GameShop.Write.Contracts.Requests;
 using MediatR;
 
 namespace GameShop.API.Write.Modules;

@@ -6,14 +6,14 @@ using MediatR;
 namespace GameShop.Application.Queries.GetAllGames;
 
 public class GetAllGamesHandler(
-    IGameRepository gameRepository) : IRequestHandler<GetAllGamesQuery, IResult<GetAllGamesResponse>>
+    IGameRepository gameRepository) : IRequestHandler<GetAllGamesQuery, IResult<GetAllGamesQueryResponse>>
 {
     private readonly IGameRepository _gameRepository = gameRepository;
 
-    public async Task<IResult<GetAllGamesResponse>> Handle(GetAllGamesQuery request, CancellationToken cancellationToken)
+    public async Task<IResult<GetAllGamesQueryResponse>> Handle(GetAllGamesQuery request, CancellationToken cancellationToken)
     {
         var games = await _gameRepository.GetAllGames(cancellationToken);
 
-        return Result.Success(games.ToGetAllGamesResponse());
+        return Result.Success(games.ToGetAllGamesQueryResponse());
     }
 }

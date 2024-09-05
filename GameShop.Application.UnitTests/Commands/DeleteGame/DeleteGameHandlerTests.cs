@@ -1,4 +1,5 @@
-﻿using GameShop.Application.Commands.DeleteGame;
+﻿using GameShop.API.Write.Contracts.Responses;
+using GameShop.Application.Commands.DeleteGame;
 using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;
 
