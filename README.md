@@ -1,4 +1,4 @@
-# GamesShop
+# GameShop
 
 This project simulates a simple video game shop, with the main entities being Games and GamesConsoles. It is built following the principles of **CQRS** (Command and Query Responsibility Segregation), **Clean Architecture**, **DDD** (Domain-Driven Design), and **Minimal APIs**.
 
