@@ -21,8 +21,8 @@ public sealed class AddGameIntegrationTests : ApiBaseTests
             .With(g => g.GameConsoleId, existingGameConsole.Id)
             .Create();
 
-        await ReadOnlyDbContext.AddAsync(existingGameConsole);
-        await ReadOnlyDbContext.SaveChangesAsync();
+        await WriteReadDbContext.AddAsync(existingGameConsole);
+        await WriteReadDbContext.SaveChangesAsync();
 
         var expected = new Game()
         {
@@ -37,14 +37,9 @@ public sealed class AddGameIntegrationTests : ApiBaseTests
         var response = await ApiClient.PostAsJsonAsync("api/AddGame", addGameRequest);
 
         // Assert
-        var actualReadOnlyDb = await ReadOnlyDbContext.Games.SingleAsync();
         var actualWriteReadDb = await WriteReadDbContext.Games.SingleAsync();
 
         response.StatusCode.Should().Be(HttpStatusCode.Created);
-        actualReadOnlyDb.Should().BeEquivalentTo(expected,
-            opts => opts
-            .Excluding(g => g.Id)
-            .Excluding(g => g.GameConsole));
         actualWriteReadDb.Should().BeEquivalentTo(expected,
             opts => opts
             .Excluding(g => g.Id)

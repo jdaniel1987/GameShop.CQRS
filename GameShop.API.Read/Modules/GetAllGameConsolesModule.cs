@@ -1,6 +1,6 @@
 ﻿using Carter;
-using GameShop.Application.Extensions;
-using GameShop.Application.Queries.GetAllGameConsoles;
+using GameShop.Application.Read.Extensions;
+using GameShop.Application.Read.Queries.GetAllGameConsoles;
 using GameShop.Domain.Entities;
 using MediatR;
 

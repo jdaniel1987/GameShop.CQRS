@@ -7,8 +7,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GameShop.Application\GameShop.Application.csproj" />
-    <ProjectReference Include="..\GameShop.Infrastructure\GameShop.Infrastructure.csproj" />
+    <ProjectReference Include="..\GameShop.Application.Read\GameShop.Application.Read.csproj" />
   </ItemGroup>
 
 </Project>

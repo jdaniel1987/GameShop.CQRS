@@ -29,11 +29,9 @@ public sealed class DeleteGameIntegrationTests : ApiBaseTests
         var response = await ApiClient.DeleteAsync($"api/DeleteGame/{gameIdToDelete}");
 
         // Assert
-        var actualReadOnlyDbContext = await ReadOnlyDbContext.Games.ToArrayAsync();
         var actualWriteReadDbContext = await WriteReadDbContext.Games.ToArrayAsync();
 
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
-        actualReadOnlyDbContext.Should().BeEmpty();
         actualWriteReadDbContext.Should().BeEmpty();
     }
 }

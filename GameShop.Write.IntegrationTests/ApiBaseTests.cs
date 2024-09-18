@@ -1,5 +1,5 @@
-﻿using GameShop.Infrastructure.Data;
-using GameShop.Infrastructure.EmailSender;
+﻿using GameShop.Infrastructure.Write.Data;
+using GameShop.Infrastructure.Write.EmailSender;
 using GameShop.Write.IntegrationTests.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -20,14 +20,11 @@ public abstract class ApiBaseTests
         });
         var scopeProvider = app.Services.GetService<IServiceScopeFactory>()!.CreateScope().ServiceProvider!;
         ApiClient = app.CreateClient();
-        ReadOnlyDbContext = scopeProvider.GetService<ReadOnlyDatabaseContext>()!;
         WriteReadDbContext = scopeProvider.GetService<WriteReadDatabaseContext>()!;
         //DatabaseSeed.SeedData(DbContext);
     }
 
     public HttpClient ApiClient { get; init; }
-
-    public ReadOnlyDatabaseContext ReadOnlyDbContext { get; init; }
 
     public WriteReadDatabaseContext WriteReadDbContext { get; init; }
 

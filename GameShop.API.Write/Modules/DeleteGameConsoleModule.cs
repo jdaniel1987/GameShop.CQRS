@@ -1,5 +1,5 @@
 ﻿using Carter;
-using GameShop.Application.Commands.DeleteGameConsole;
+using GameShop.Application.Write.Commands.DeleteGameConsole;
 using GameShop.Domain.Entities;
 using MediatR;
 

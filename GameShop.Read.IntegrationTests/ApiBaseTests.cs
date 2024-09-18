@@ -1,4 +1,4 @@
-﻿using GameShop.Infrastructure.Data;
+﻿using GameShop.Infrastructure.Read.Data;
 using GameShop.Read.IntegrationTests.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,12 +13,9 @@ public abstract class ApiBaseTests
         var scopeProvider = app.Services.GetService<IServiceScopeFactory>()!.CreateScope().ServiceProvider!;
         ApiClient = app.CreateClient();
         ReadOnlyDbContext = scopeProvider.GetService<ReadOnlyDatabaseContext>()!;
-        WriteReadDbContext = scopeProvider.GetService<WriteReadDatabaseContext>()!;
     }
 
     public HttpClient ApiClient { get; init; }
 
     public ReadOnlyDatabaseContext ReadOnlyDbContext { get; init; }
-
-    public WriteReadDatabaseContext WriteReadDbContext { get; init; }
 }

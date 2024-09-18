@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.42.5" />
+    <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GameShop.API.Read.Contracts\GameShop.API.Read.Contracts.csproj" />
+    <ProjectReference Include="..\GameShop.Infrastructure.Read\GameShop.Infrastructure.Read.csproj" />
+  </ItemGroup>
+  
+</Project>

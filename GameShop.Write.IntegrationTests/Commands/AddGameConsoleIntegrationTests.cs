@@ -23,13 +23,8 @@ public sealed class AddGameConsoleIntegrationTests : ApiBaseTests
         };
 
         // Assert
-        var actualReadOnlyDb = await ReadOnlyDbContext.GameConsoles.SingleAsync();
         var actualWriteReadDb = await WriteReadDbContext.GameConsoles.SingleAsync();
         response.StatusCode.Should().Be(HttpStatusCode.Created);
-        actualReadOnlyDb.Should().BeEquivalentTo(expected,
-            opts => opts
-            .Excluding(g => g.Id)
-            .Excluding(g => g.Games));
         actualWriteReadDb.Should().BeEquivalentTo(expected,
             opts => opts
             .Excluding(g => g.Id)

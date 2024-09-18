@@ -1,6 +1,6 @@
 ﻿using Carter;
 using GameShop.API.Write.Contracts.Requests;
-using GameShop.Application.Extensions;
+using GameShop.Application.Write.Extensions;
 using GameShop.Domain.Entities;
 using MediatR;
 
