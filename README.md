@@ -1,4 +1,4 @@
-# GamesShop
+# GameShop
 
 This project simulates a simple video game shop, with the main entities being Games and GamesConsoles. It is built following the principles of **CQRS** (Command and Query Responsibility Segregation), **Clean Architecture**, **DDD** (Domain-Driven Design), and **Minimal APIs**.
 
@@ -23,6 +23,6 @@ This project simulates a simple video game shop, with the main entities being Ga
 # The tech stack used to build unit and integration tests is:  
 - **FluentAssertions**: Allows creating fluent and easy-to-understand assertions.  
 - **AutoFixture**: Helps create objects automatically for use in tests.
-- **AutoFixture.AutomMoq**: Creates mocks for interfaces automatically when used as test parameters.
+- **AutoFixture.AutoMoq**: Creates mocks for interfaces automatically when used as test parameters.
 - **ILogger.Moq**: Helps create and assert on logger mocks.
 - **Microsoft.EntityFrameworkCore.InMemory**: Replaces SQL Server database with an in-memory one for testing purposes.
