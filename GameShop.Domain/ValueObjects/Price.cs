@@ -9,6 +9,11 @@ public record Price
     [JsonConstructor]
     internal Price(double value)
     {
+        if(value < 0)
+        {
+            throw new ArgumentException("Price cannot be negative", nameof(value));
+        }
+
         Value = value;
     }
 

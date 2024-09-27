@@ -1,4 +1,5 @@
-﻿using GameShop.Domain.ValueObjects;
+﻿using AutoFixture;
+using GameShop.Domain.ValueObjects;
 
 namespace GameShop.Domain.UnitTests.ValueObjects;
 
@@ -27,6 +28,20 @@ public sealed class PriceEurosTests
 
         // Assert
         result.Should().Be(value.ToString());
+    }
+
+    [Theory, AutoData]
+    public void Create_ShoulThrow_WhenPriceNegative(
+        IFixture fixture)
+    {
+        // Arrange
+        var negativeValue = Math.Abs(fixture.Create<double>()) * -1;
+
+        // Act
+        var action = () => PriceEuros.Create(negativeValue);
+
+        // Assert
+        action.Should().Throw<ArgumentException>();
     }
 }
 

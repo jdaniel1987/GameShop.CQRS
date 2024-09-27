@@ -6,6 +6,10 @@ public record PriceEuros
 
     internal PriceEuros(double value)
     {
+        if(value < 0)
+        {
+            throw new ArgumentException("Price cannot be negative", nameof(value));
+        }
         Value = value;
     }
 
