@@ -2,11 +2,12 @@
 
   <ItemGroup>
     <PackageReference Include="Carter" Version="8.2.1" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GameShop.API.Read.Contracts\GameShop.API.Read.Contracts.csproj" />
     <ProjectReference Include="..\GameShop.Application.Read\GameShop.Application.Read.csproj" />
   </ItemGroup>
 

@@ -1,51 +1,17 @@
-﻿using GameShop.API.Write.Contracts.Requests;
-using GameShop.Application.Write.Commands.AddGame;
+﻿using GameShop.Application.Write.Commands.AddGame;
 using GameShop.Application.Write.Commands.UpdateGame;
-using GameShop.Application.Write.Extensions;
+using GameShop.Application.Write.Mappers;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
 
-namespace GameShop.Application.Write.UnitTests.Extensions;
+namespace GameShop.Application.Write.UnitTests.Mappers;
 
-public sealed class GameWriteExtensionsTests
+public sealed class GameWriteMappersTests
 {
-    public sealed class AddGameRequestToCommand
-    {
-        [Theory, AutoData]
-        public void ToCommand_ShouldConvertAddGameRequestToAddGameCommand(AddGameRequest request)
-        {
-            // Act
-            var command = request.ToCommand();
-
-            // Assert
-            command.Name.Should().Be(request.Name);
-            command.Publisher.Should().Be(request.Publisher);
-            command.GameConsoleId.Should().Be(request.GameConsoleId);
-            command.Price.Should().Be(request.Price);
-        }
-    }
-
-    public sealed class UpdateGameRequestToCommand
-    {
-        [Theory, AutoData]
-        public void ToCommand_ShouldConvertUpdateGameRequestToUpdateGameCommand(UpdateGameRequest request)
-        {
-            // Act
-            var command = request.ToCommand();
-
-            // Assert
-            command.Id.Should().Be(request.Id);
-            command.Name.Should().Be(request.Name);
-            command.Publisher.Should().Be(request.Publisher);
-            command.GameConsoleId.Should().Be(request.GameConsoleId);
-            command.Price.Should().Be(request.Price);
-        }
-    }
-
     public sealed class AddGameCommandToDomain
     {
         [Theory, AutoData]
-        public void ToDomain_ShouldConvertAddGameCommandToGame(AddGameCommand command)
+        public void ToDomain_ShouldConvertAddGameCommand(AddGameCommand command)
         {
             // Arrange
 
@@ -63,7 +29,7 @@ public sealed class GameWriteExtensionsTests
     public sealed class UpdateGameCommandToDomain
     {
         [Theory, AutoData]
-        public void ToDomain_ShouldConvertUpdateGameCommandToGame(UpdateGameCommand command)
+        public void ToDomain_ShouldConvertUpdateGameCommand(UpdateGameCommand command)
         {
             // Arrange
 
@@ -82,7 +48,7 @@ public sealed class GameWriteExtensionsTests
     public sealed class GameToEvent
     {
         [Theory, AutoData]
-        public void ToEvent_ShouldConvertGameToGameCreatedEvent(
+        public void ToEvent_ShouldConvertGame(
             IFixture fixture)
         {
             // Arrange
@@ -107,7 +73,7 @@ public sealed class GameWriteExtensionsTests
     public sealed class GameToAddGameCommandResponse
     {
         [Theory, AutoData]
-        public void ToAddGameCommandResponse_ShouldConvertGameToAddGameCommandResponse(
+        public void ToAddGameCommandResponse_ShouldConvertGame(
             IFixture fixture)
         {
             // Arrange

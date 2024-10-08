@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="CSharpFunctionalExtensions" Version="3.0.0" />
+    <PackageReference Include="CSharpFunctionalExtensions" Version="3.1.0" />
     <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GameShop.API.Write.Contracts\GameShop.API.Write.Contracts.csproj" />
     <ProjectReference Include="..\GameShop.Infrastructure.Write\GameShop.Infrastructure.Write.csproj" />
   </ItemGroup>
   

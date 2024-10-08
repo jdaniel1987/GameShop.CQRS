@@ -1,26 +1,12 @@
-﻿using GameShop.API.Write.Contracts.Requests;
-using GameShop.Application.Write.Commands.AddGameConsole;
+﻿using GameShop.Application.Write.Commands.AddGameConsole;
 using GameShop.Application.Write.Commands.UpdateGameConsole;
 using GameShop.Domain.Entities;
 using GameShop.Domain.ValueObjects;
 
-namespace GameShop.Application.Write.Extensions;
+namespace GameShop.Application.Write.Mappers;
 
-public static class GameConsoleWriteExtensions
-{
-    public static AddGameConsoleCommand ToCommand(this AddGameConsoleRequest gameConsole) =>
-        new(
-            gameConsole.Name,
-            gameConsole.Manufacturer,
-            gameConsole.Price);
-
-    public static UpdateGameConsoleCommand ToCommand(this UpdateGameConsoleRequest gameConsole) =>
-        new(
-            gameConsole.Id,
-            gameConsole.Name,
-            gameConsole.Manufacturer,
-            gameConsole.Price);
-
+public static class GameConsoleWriteMappers
+{    
     public static GameConsole ToDomain(this AddGameConsoleCommand command) =>
         new()
         {

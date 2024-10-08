@@ -1,5 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
-using GameShop.Application.Read.Extensions;
+using GameShop.Application.Read.Mappers;
 using GameShop.Domain.Repositories;
 using MediatR;
 
@@ -10,7 +10,7 @@ public class GetAllGameConsolesHandler(
 {
     private readonly IGameConsoleReadRepository _gameConsoleReadRepository = gameConsoleReadRepository;
 
-    public async Task<IResult<GetAllGameConsolesQueryResponse>> Handle(GetAllGameConsolesQuery request, CancellationToken cancellationToken)
+    public async Task<IResult<GetAllGameConsolesQueryResponse>> Handle(GetAllGameConsolesQuery query, CancellationToken cancellationToken)
     {
         var gameConsoles = await _gameConsoleReadRepository.GetAllGameConsoles(cancellationToken);
 

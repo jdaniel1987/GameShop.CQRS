@@ -1,5 +1,5 @@
 ﻿using Carter;
-using GameShop.Application.Read.Extensions;
+using GameShop.API.Read.Mappers;
 using GameShop.Application.Read.Queries.GetAllGameConsoles;
 using GameShop.Domain.Entities;
 using MediatR;

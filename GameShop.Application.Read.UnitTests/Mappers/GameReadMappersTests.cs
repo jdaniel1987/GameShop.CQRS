@@ -1,11 +1,8 @@
-﻿using GameShop.Application.Read.Extensions;
-using GameShop.Application.Read.Queries.GetAllGames;
-using GameShop.Application.Read.Queries.GetGamesByName;
-using GameShop.Application.Read.Queries.GetGamesForConsole;
+﻿using GameShop.Application.Read.Mappers;
 using GameShop.Domain.Entities;
 using System.Collections.Immutable;
 
-namespace GameShop.Application.Read.UnitTests.Extensions;
+namespace GameShop.Application.Read.UnitTests.Mappers;
 
 public sealed class GameReadExtensionsTests
 {
@@ -90,54 +87,6 @@ public sealed class GameReadExtensionsTests
             queryResponse.Games.Select(g => g.Price).Should().BeEquivalentTo(games.Select(g => g.Price.Value));
             queryResponse.Games.Select(g => g.GameConsoleId).Should().BeEquivalentTo(games.Select(g => g.GameConsoleId));
             queryResponse.Games.Select(g => g.GameConsoleName).Should().BeEquivalentTo(games.Select(g => g.GameConsole!.Name));
-        }
-    }
-
-    public sealed class GameToGetAllGamesResponse
-    {
-        [Theory, AutoData]
-        public void ToGetAllGamesResponse_ShouldConvertGameToGetAllGamesResponse(
-            GetAllGamesQueryResponse queryResponse)
-        {
-            // Arrange
-
-            // Act
-            var response = queryResponse.ToGetAllGamesResponse();
-
-            // Assert
-            response.Should().BeEquivalentTo(queryResponse);
-        }
-    }
-
-    public sealed class GameToGetGamesByNameResponse
-    {
-        [Theory, AutoData]
-        public void ToGetGamesByNameResponse_ShouldConvertGameToGetGamesByNameResponse(
-            GetGamesByNameQueryResponse queryResponse)
-        {
-            // Arrange
-
-            // Act
-            var response = queryResponse.ToGetGamesByNameResponse();
-
-            // Assert
-            response.Should().BeEquivalentTo(queryResponse);
-        }
-    }
-
-    public sealed class GameToGetGamesForConsoleResponse
-    {
-        [Theory, AutoData]
-        public void ToGetGamesForConsoleResponse_ShouldConvertGameToGetGamesForConsoleResponse(
-            GetGamesForConsoleQueryResponse queryResponse)
-        {
-            // Arrange
-
-            // Act
-            var response = queryResponse.ToGetGamesForConsoleResponse();
-
-            // Assert
-            response.Should().BeEquivalentTo(queryResponse);
         }
     }
 }

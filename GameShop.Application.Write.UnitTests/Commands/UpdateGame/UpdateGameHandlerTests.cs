@@ -1,5 +1,4 @@
-﻿using GameShop.API.Write.Contracts.Responses;
-using GameShop.Application.Write.Commands.UpdateGame;
+﻿using GameShop.Application.Write.Commands.UpdateGame;
 using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;
 
@@ -58,6 +57,6 @@ public sealed class UpdateGameHandlerTests
         gameWriteRepositoryMock.Verify(repo => repo.UpdateGame(It.IsAny<Game>(), It.IsAny<CancellationToken>()), Times.Once);
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().NotBeNull();
-        result.Value.Should().BeOfType<UpdateGameResponse>();
+        result.Value.Should().BeOfType<UpdateGameCommandResponse>();
     }
 }

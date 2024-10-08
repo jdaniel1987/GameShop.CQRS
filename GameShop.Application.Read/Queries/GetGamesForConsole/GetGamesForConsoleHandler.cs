@@ -1,5 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
-using GameShop.Application.Read.Extensions;
+using GameShop.Application.Read.Mappers;
 using GameShop.Domain.Repositories;
 using MediatR;
 
@@ -12,16 +12,16 @@ public class GetGamesForConsoleHandler(
     private readonly IGameReadRepository _gameReadRepository = gameReadRepository;
     private readonly IGameConsoleReadRepository _gameConsoleReadRepository = gameConsoleReadRepository;
 
-    public async Task<IResult<GetGamesForConsoleQueryResponse>> Handle(GetGamesForConsoleQuery request, CancellationToken cancellationToken)
+    public async Task<IResult<GetGamesForConsoleQueryResponse>> Handle(GetGamesForConsoleQuery query, CancellationToken cancellationToken)
     {
-        var console = await _gameConsoleReadRepository.GetGameConsole(request.GameConsoleId, cancellationToken);
+        var console = await _gameConsoleReadRepository.GetGameConsole(query.GameConsoleId, cancellationToken);
 
         if(console is null)
         {
-            return Result.Failure<GetGamesForConsoleQueryResponse>($"Console with ID {request.GameConsoleId} does not exist");
+            return Result.Failure<GetGamesForConsoleQueryResponse>($"Console with ID {query.GameConsoleId} does not exist");
         }
 
-        var games = await _gameReadRepository.GetGamesForConsole(request.GameConsoleId, cancellationToken);
+        var games = await _gameReadRepository.GetGamesForConsole(query.GameConsoleId, cancellationToken);
 
         return Result.Success(games.ToGetGamesForConsoleQueryResponse());
     }

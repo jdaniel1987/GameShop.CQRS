@@ -1,5 +1,4 @@
-﻿using GameShop.API.Write.Contracts.Responses;
-using GameShop.Application.Write.Commands.DeleteGameConsole;
+﻿using GameShop.Application.Write.Commands.DeleteGameConsole;
 using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;
 
@@ -52,6 +51,6 @@ public sealed class DeleteGameConsoleHandlerTests
         gameConsoleWriteRepositoryMock.Verify(repo => repo.DeleteGameConsole(gameConsole, It.IsAny<CancellationToken>()), Times.Once);
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().NotBeNull();
-        result.Value.Should().BeOfType<DeleteGameConsoleResponse>();
+        result.Value.Should().BeOfType<DeleteGameConsoleCommandResponse>();
     }
 }

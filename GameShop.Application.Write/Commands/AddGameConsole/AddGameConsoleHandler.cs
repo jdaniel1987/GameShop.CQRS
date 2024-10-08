@@ -1,5 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
-using GameShop.Application.Write.Extensions;
+using GameShop.Application.Write.Mappers;
 using GameShop.Domain.Repositories;
 using MediatR;
 
@@ -10,9 +10,9 @@ public class AddGameConsoleHandler(
 {
     private readonly IGameConsoleWriteRepository _gameConsoleWriteRepository = gameConsoleWriteRepository;
 
-    public async Task<IResult<AddGameConsoleCommandResponse>> Handle(AddGameConsoleCommand request, CancellationToken cancellationToken)
+    public async Task<IResult<AddGameConsoleCommandResponse>> Handle(AddGameConsoleCommand command, CancellationToken cancellationToken)
     {
-        var gameConsole = request.ToDomain();
+        var gameConsole = command.ToDomain();
         await _gameConsoleWriteRepository.AddGameConsole(gameConsole, cancellationToken);
 
         return Result.Success(gameConsole.ToAddGameConsoleCommandResponse());

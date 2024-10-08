@@ -1,11 +1,10 @@
-﻿using GameShop.Application.Read.Extensions;
-using GameShop.Domain.Entities;
+﻿using GameShop.Domain.Entities;
 using System.Collections.Immutable;
-using GameShop.Application.Read.Queries.GetAllGameConsoles;
+using GameShop.Application.Read.Mappers;
 
-namespace GameShop.Application.Read.UnitTests.Extensions;
+namespace GameShop.Application.Read.UnitTests.Mappers;
 
-public sealed class GameConsoleReadExtensionsTests
+public sealed class GameConsoleReadMappersTests
 {
     public sealed class GameConsolesToGetAllGameConsolesQueryResponse
     {
@@ -32,22 +31,6 @@ public sealed class GameConsoleReadExtensionsTests
             queryResponse.GameConsoles.Select(g => g.Manufacturer).Should().BeEquivalentTo(gameConsoles.Select(g => g.Manufacturer));
             queryResponse.GameConsoles.Select(g => g.Price).Should().BeEquivalentTo(gameConsoles.Select(g => g.Price.Value));
             queryResponse.GameConsoles.Select(g => g.NumberOfGames).Should().BeEquivalentTo(gameConsoles.Select(g => g.Games.Count));
-        }
-    }
-
-    public sealed class GetAllGameConsolesQueryResponseToGetAllGameConsolesResponse
-    {
-        [Theory, AutoData]
-        public void ToGetAllGameConsolesResponse_ShouldConvertGetAllGameConsolesQueryResponseToGetAllGameConsolesResponse(
-            GetAllGameConsolesQueryResponse queryResponse)
-        {
-            // Arrange
-
-            // Act
-            var response = queryResponse.ToGetAllGameConsolesResponse();
-
-            // Assert
-            response.Should().BeEquivalentTo(queryResponse);
         }
     }
 }

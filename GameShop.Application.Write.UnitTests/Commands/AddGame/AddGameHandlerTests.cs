@@ -1,5 +1,4 @@
-﻿using GameShop.API.Write.Contracts.Responses;
-using GameShop.Application.Write.Commands.AddGame;
+﻿using GameShop.Application.Write.Commands.AddGame;
 using GameShop.Application.Write.Events.GameCreated;
 using GameShop.Domain.Entities;
 using GameShop.Domain.Repositories;
@@ -72,6 +71,6 @@ public sealed class AddGameHandlerTests
         publisherMock.Verify(pub => pub.Publish(It.IsAny<GameCreatedEvent>(), It.IsAny<CancellationToken>()), Times.Once);
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().NotBeNull();
-        result.Value.Should().BeOfType<AddGameResponse>();
+        result.Value.Should().BeOfType<AddGameCommandResponse>();
     }
 }

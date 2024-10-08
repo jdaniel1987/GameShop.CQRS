@@ -1,50 +1,16 @@
-﻿using GameShop.Application.Write.Extensions;
-using GameShop.API.Write.Contracts.Requests;
-using GameShop.Domain.Entities;
+﻿using GameShop.Domain.Entities;
 using GameShop.Application.Write.Commands.AddGameConsole;
 using GameShop.Application.Write.Commands.UpdateGameConsole;
+using GameShop.Application.Write.Mappers;
 
-namespace GameShop.Application.Write.UnitTests.Extensions;
+namespace GameShop.Application.Write.UnitTests.Mappers;
 
-public sealed class GameConsoleWriteExtensionsTests
+public sealed class GameConsoleWriteMappersTests
 {
-    public sealed class AddGameConsoleRequestToCommand
-    {
-        [Theory, AutoData]
-        public void ToCommand_ShouldConvertAddGameConsoleRequestToAddGameConsoleCommand(
-            AddGameConsoleRequest request)
-        {
-            // Act
-            var command = request.ToCommand();
-
-            // Assert
-            command.Name.Should().Be(request.Name);
-            command.Manufacturer.Should().Be(request.Manufacturer);
-            command.Price.Should().Be(request.Price);
-        }
-    }
-
-    public sealed class UpdateGameConsoleRequestToCommand
-    {
-        [Theory, AutoData]
-        public void ToCommand_ShouldConvertUpdateGameConsoleRequestToUpdateGameConsoleCommand(
-            UpdateGameConsoleRequest request)
-        {
-            // Act
-            var command = request.ToCommand();
-
-            // Assert
-            command.Id.Should().Be(request.Id);
-            command.Name.Should().Be(request.Name);
-            command.Manufacturer.Should().Be(request.Manufacturer);
-            command.Price.Should().Be(request.Price);
-        }
-    }
-
     public sealed class AddGameConsoleCommandToDomain
     {
         [Theory, AutoData]
-        public void ToDomain_ShouldConvertAddGameConsoleCommandToGameConsole(
+        public void ToDomain_ShouldConvertAddGameConsoleCommand(
             AddGameConsoleCommand command)
         {
             // Arrange
@@ -63,7 +29,7 @@ public sealed class GameConsoleWriteExtensionsTests
     public sealed class UpdateGameConsoleCommandToDomain
     {
         [Theory, AutoData]
-        public void ToDomain_ShouldConvertUpdateGameConsoleCommandToGameConsole(
+        public void ToDomain_ShouldConvertUpdateGameConsoleCommand(
             UpdateGameConsoleCommand command)
         {
             // Arrange
@@ -83,7 +49,7 @@ public sealed class GameConsoleWriteExtensionsTests
     public sealed class GameConsoleToAddGameConsoleCommandResponse
     {
         [Theory, AutoData]
-        public void ToDomain_ShouldConvertAddGameConsoleCommandToGameConsole(
+        public void ToAddGameConsoleCommandResponse_ShouldConvertGameConsole(
             IFixture fixture)
         {
             // Arrange
@@ -103,7 +69,7 @@ public sealed class GameConsoleWriteExtensionsTests
     public sealed class GameConsoleToUpdateGameConsoleCommandResponse
     {
         [Theory, AutoData]
-        public void ToDomain_ShouldConvertUpdateGameConsoleCommandToGameConsole(
+        public void ToUpdateGameConsoleCommandResponse_ShouldConvertUpdateGameConsoleCommand(
             IFixture fixture)
         {
             // Arrange
